@@ -1,0 +1,951 @@
+[
+  {
+    "word": "drawl",
+    "meaning": "v. 慢吞吞地说, 故意拉长调子讲话\\nn. 慢吞吞拉长调子的说话方式",
+    "synonyms": [],
+    "chineseMeaning": "v. 慢吞吞地说, 故意拉长调子讲话\\nn. 慢吞吞拉长调子的说话方式",
+    "englishMeaning": "slow speech pattern with prolonged vowels",
+    "distractors": [
+      "an inclined surface connecting two levels",
+      "the characteristic sounds made by a horse",
+      "(philosophy) the doctrine that knowledge is acquired by reason without resort to experience",
+      "artifact consisting of soft or resilient material used to fill or give shape or protect or add comfort",
+      "of someone whose marriage has been legally dissolved",
+      "existing as an essential constituent or characteristic"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "muse",
+    "meaning": "n. 沉思, 冥想\\nv. 沉思, 冥想, 若有所思地凝望或说",
+    "synonyms": [],
+    "chineseMeaning": "n. 沉思, 冥想\\nv. 沉思, 冥想, 若有所思地凝望或说",
+    "englishMeaning": "in ancient Greek mythology any of 9 daughters of Zeus and Mnemosyne",
+    "distractors": [
+      "collection of dried plants that are mounted and systematically classified for study",
+      "the configuration of a surface and the relations among its man-made and natural features",
+      "someone who makes predictions of the future (usually on the basis of special knowledge)",
+      "of or relating to or obtained from milk (especially sour milk or whey)",
+      "the branch of medical science that deals with diseases and problems specific to old people",
+      "the upper surface of the mouth that separates the oral and nasal cavities"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "wander",
+    "meaning": "vi. 游荡, 漫步, 徘徊, 迷路, 离题, 蜿蜒\\nvt. 在...漫游",
+    "synonyms": [
+      "roll",
+      "swan",
+      "stray",
+      "tramp",
+      "roam",
+      "cast"
+    ],
+    "chineseMeaning": "vi. 游荡, 漫步, 徘徊, 迷路, 离题, 蜿蜒\\nvt. 在...漫游",
+    "englishMeaning": "move about aimlessly or without any destination, often in search of food or employment",
+    "distractors": [
+      "soft food made by boiling oatmeal or other meal or legumes in water or milk until thick",
+      "the countries of (originally) Europe and (now including) North America and South America",
+      "law officer having duties similar to those of a sheriff in carrying out the judgments of a court of law",
+      "written assurance that some product or service will be provided or will meet certain specifications",
+      "an average of n numbers computed by adding some function of the numbers and dividing by some function of n",
+      "severe tropical cyclone usually with heavy rains and winds moving a 73-136 knots (12 on the Beaufort scale)"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "subtle",
+    "meaning": "a. 敏锐的, 精细的, 狡猾的, 稀薄的, 灵巧的, 微妙的\\n[医] 锐敏的; 精细的",
+    "synonyms": [
+      "elusive"
+    ],
+    "chineseMeaning": "a. 敏锐的, 精细的, 狡猾的, 稀薄的, 灵巧的, 微妙的\\n[医] 锐敏的; 精细的",
+    "englishMeaning": "difficult to detect or grasp by the mind or analyze",
+    "distractors": [
+      "wine that is a blend of several varieties of grapes with no one grape predominating",
+      "the act of moving something from one location to another",
+      "specify as a condition or requirement in a contract or agreement",
+      "someone who commits capital in order to gain financial returns",
+      "endowed with feeling and unstructured consciousness",
+      "someone who makes predictions of the future (usually on the basis of special knowledge)"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "infringe",
+    "meaning": "v. 破坏, 侵犯, 违反",
+    "synonyms": [
+      "conflict",
+      "run afoul",
+      "contravene"
+    ],
+    "chineseMeaning": "v. 破坏, 侵犯, 违反",
+    "englishMeaning": "go against, as of rules and laws",
+    "distractors": [
+      "the finest or most superior quality of its kind",
+      "murderer (especially one who kills a prominent political figure) who kills by a surprise attack and often is hired to do the deed",
+      "the act of rearranging things to give a misleading impression",
+      "(ancient Rome) a religious official who interpreted omens to guide public policy",
+      "prostitution of talents or offices or services for reward",
+      "distinctive odor that is offensively unpleasant"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "economy",
+    "meaning": "n. 经济, 理财, 节约\\n[医] 经济, 整体",
+    "synonyms": [
+      "economic system"
+    ],
+    "chineseMeaning": "n. 经济, 理财, 节约\\n[医] 经济, 整体",
+    "englishMeaning": "the system of production and distribution and consumption",
+    "distractors": [
+      "metal cleat on the bottom front of a horseshoe to prevent slipping",
+      "an extended communication (often interactive) dealing with some particular topic",
+      "gradually deprive (infants and young mammals) of mother's milk",
+      "floor consisting of a large unpartitioned space over a factory or warehouse or other commercial space",
+      "(law) a defense by an accused person purporting to show that he or she could not have committed the crime in question",
+      "relating to or characteristic of animals of the class Amphibia"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "torrent",
+    "meaning": "n. 奔流, 倾盆大雨, 倾注, 迸发",
+    "synonyms": [
+      "downpour",
+      "cloudburst",
+      "deluge",
+      "waterspout",
+      "pelter",
+      "soaker"
+    ],
+    "chineseMeaning": "n. 奔流, 倾盆大雨, 倾注, 迸发",
+    "englishMeaning": "heavy rain",
+    "distractors": [
+      "show the form or outline of",
+      "(mathematics) calculation of the value of a function outside the range of known values",
+      "person who is loathsome or disgusting",
+      "the act of avoiding capture (especially by cunning)",
+      "the size of a book whose pages are made by folding a sheet of paper three times to form eight leaves",
+      "be agreeable or acceptable to"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "presume",
+    "meaning": "vt. 假定, 推测, 擅自, 意味着\\nvi. 擅自行动, 相信",
+    "synonyms": [
+      "assume",
+      "take for granted"
+    ],
+    "chineseMeaning": "vt. 假定, 推测, 擅自, 意味着\\nvi. 擅自行动, 相信",
+    "englishMeaning": "take to be the case or to be true",
+    "distractors": [
+      "sheltered port where ships can take on or discharge cargo",
+      "burial chamber (usually underground)",
+      "one of several parts or pieces that fit with others to constitute a whole object",
+      "any of various small boats propelled by oars or by sails or by a motor",
+      "suck milk from the mother's breasts",
+      "straying from the right course or from accepted standards"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "hindsight",
+    "meaning": "n. 枪的表尺, 事后聪明",
+    "synonyms": [],
+    "chineseMeaning": "n. 枪的表尺, 事后聪明",
+    "englishMeaning": "understanding the nature of an event after it has happened",
+    "distractors": [
+      "gear (including necessary machinery) for a particular enterprise",
+      "bandage that stops the flow of blood from an artery by applying pressure",
+      "revolutionary doctrine that advocates destruction of the social system for its own sake",
+      "thin tapered rod used by a conductor to lead an orchestra or choir",
+      "the ability of a customer to obtain goods or services before payment, based on the trust that payment will be made in the future",
+      "change the appearance of, especially by marking with different colors"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "esquire",
+    "meaning": "n. 先生, 绅士",
+    "synonyms": [],
+    "chineseMeaning": "n. 先生, 绅士",
+    "englishMeaning": "(Middle Ages) an attendant and shield bearer to a knight",
+    "distractors": [
+      "member of the ancient Greek school of philosophy founded by Zeno",
+      "based primarily on surmise rather than adequate evidence",
+      "statement that is assumed to be true and from which a conclusion can be drawn",
+      "policy of taking direct and militant action to achieve a political or social goal",
+      "the kinship relation between a female offspring and the siblings",
+      "belief (or system of beliefs) accepted as authoritative by some group or school"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "depository",
+    "meaning": "n. 仓库, 贮藏所, 受托者\\n[经] 受托人, 保管人, 保管所",
+    "synonyms": [
+      "deposit",
+      "depositary",
+      "repository"
+    ],
+    "chineseMeaning": "n. 仓库, 贮藏所, 受托者\\n[经] 受托人, 保管人, 保管所",
+    "englishMeaning": "facility where things can be deposited for storage or safekeeping",
+    "distractors": [
+      "set of three literary or dramatic works related in subject or theme",
+      "(music) the distinctive property of a complex sound (a voice or noise or musical sound)",
+      "soldier who is a member of a legion (especially the French Foreign Legion)",
+      "analyze syntactically by assigning a constituent structure to (a sentence)",
+      "someone who procures customers for whores (in England they call a pimp a ponce)",
+      "living quarters consisting of a superstructure in the bow of a merchant ship where the crew is housed"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "wizened",
+    "meaning": "a. 干枯的, 枯萎的, 干瘪的, 消瘦的",
+    "synonyms": [
+      "shriveled",
+      "shrivelled",
+      "shrunken",
+      "withered",
+      "wizen"
+    ],
+    "chineseMeaning": "a. 干枯的, 枯萎的, 干瘪的, 消瘦的",
+    "englishMeaning": "lean and wrinkled by shrinkage as from age or illness",
+    "distractors": [
+      "exercising by repeatedly assuming a crouching position with the knees bent",
+      "good luck in making unexpected and fortunate discoveries",
+      "binding agreement between two or more persons that is enforceable by law",
+      "the act of excluding someone by a negative vote or veto",
+      "(virology) ultramicroscopic infectious agent that replicates itself only within cells of living hosts",
+      "continuous and profound contemplation or musing on a subject or series of subjects of a deep or abstruse nature"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "sense",
+    "meaning": "n. 感应, 感觉, 感官, 意识, 观念, 情理, 知觉, 理智\\nvt. 感觉, 觉察, 检测\\n[计] 阅读; 检测",
+    "synonyms": [],
+    "chineseMeaning": "n. 感应, 感觉, 感官, 意识, 观念, 情理, 知觉, 理智\\nvt. 感觉, 觉察, 检测\\n[计] 阅读; 检测",
+    "englishMeaning": "general conscious awareness",
+    "distractors": [
+      "group of people attractively arranged (as if in a painting)",
+      "light sharp contact (usually with something flexible)",
+      "state of extreme poverty or destitution",
+      "understatement for rhetorical effect (especially when expressing an affirmative by negating its contrary)",
+      "(ballet) a step in dancing (especially in classical ballet)",
+      "any of various mints of the genus Thymus"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "hospitality",
+    "meaning": "n. 款待, 亲切, 殷勤",
+    "synonyms": [
+      "cordial reception"
+    ],
+    "chineseMeaning": "n. 款待, 亲切, 殷勤",
+    "englishMeaning": "kindness in welcoming guests or strangers",
+    "distractors": [
+      "slight depression in the smoothness of a surface",
+      "arouse hostility or indifference in where there had formerly been love, affection, or friendliness",
+      "an account of the author's personal experiences",
+      "the 100th anniversary (or the celebration of it)",
+      "public area set aside as a pedestrian walk",
+      "affectedly modest or shy especially in a playful or provocative way"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "discipline",
+    "meaning": "n. 训练, 纪律\\nvt. 训练, 惩罚",
+    "synonyms": [
+      "subject",
+      "subject area",
+      "subject field",
+      "field",
+      "field of study",
+      "study"
+    ],
+    "chineseMeaning": "n. 训练, 纪律\\nvt. 训练, 惩罚",
+    "englishMeaning": "branch of knowledge",
+    "distractors": [
+      "an irrational motive for performing trivial or repetitive actions, even against your will",
+      "pair who associate with one another",
+      "natural inclination",
+      "aspect with regard to the beginning of the action of the verb",
+      "large southern European spider once thought to be the cause of tarantism (uncontrollable bodily movement)",
+      "the state of being isolated or detached"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "swing",
+    "meaning": "n. 摇摆, 振幅, 音律, 节奏, 涨落, 秋千, 旋转, 行动自由\\nvi. 摇摆, 悬挂, 旋转, 大摇大摆地走, 转向\\nvt. 挥舞, 使旋转, 使转向, 悬挂, 吊运\\na. 旋转的, 悬挂的, 强节奏爵士音乐的",
+    "synonyms": [],
+    "chineseMeaning": "n. 摇摆, 振幅, 音律, 节奏, 涨落, 秋千, 旋转, 行动自由\\nvi. 摇摆, 悬挂, 旋转, 大摇大摆地走, 转向\\nvt. 挥舞, 使旋转, 使转向, 悬挂, 吊运\\na. 旋转的, 悬挂的, 强节奏爵士音乐的",
+    "englishMeaning": "state of steady vigorous action that is characteristic of an activity",
+    "distractors": [
+      "someone who is repeatedly arrested for criminal behavior (especially for the same criminal behavior)",
+      "any of several herbivorous leaping marsupials of Australia and New Guinea having large powerful hind legs and a long thick tail",
+      "person who is loyal to their allegiance (especially in times of revolt)",
+      "an examination and dissection of a dead body to determine cause of death or the changes produced by disease",
+      "an organization of people (or countries) involved in a pact or treaty",
+      "luminance unit equal to 1 candle per square meter measured perpendicular to the rays from the source"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "heyday",
+    "meaning": "n. 全盛期\\ninterj. 嘿",
+    "synonyms": [
+      "flower",
+      "prime",
+      "peak",
+      "bloom",
+      "blossom",
+      "efflorescence"
+    ],
+    "chineseMeaning": "n. 全盛期\\ninterj. 嘿",
+    "englishMeaning": "the period of greatest prosperity or productivity",
+    "distractors": [
+      "power to affect persons or events especially power based on prestige etc",
+      "chemical used to kill pests (as rodents or insects)",
+      "chorus that sings as part of a religious ceremony",
+      "pertaining to or containing or consisting of semen",
+      "an amateur who engages in an activity without serious intentions and who pretends to have knowledge",
+      "the act of clearing yourself (or another) from some stigma or charge"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "originate",
+    "meaning": "vt. 创始, 发明, 发起\\nvi. 发源, 发生, 起航\\n[计] 发自",
+    "synonyms": [
+      "arise",
+      "rise",
+      "develop",
+      "uprise",
+      "spring up",
+      "grow"
+    ],
+    "chineseMeaning": "vt. 创始, 发明, 发起\\nvi. 发源, 发生, 起航\\n[计] 发自",
+    "englishMeaning": "come into existence",
+    "distractors": [
+      "too obvious to be doubted",
+      "remove from customary environment or associations",
+      "the size of something as given by the distance around it",
+      "all of the same or similar kind or nature",
+      "deep opening in the earth's surface",
+      "excrete perspiration through the pores in the skin"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "steadfast",
+    "meaning": "a. 坚定的, 踏实的, 固定的, 不变的",
+    "synonyms": [
+      "firm",
+      "steady",
+      "stiff",
+      "unbendable",
+      "unfaltering",
+      "unshakable"
+    ],
+    "chineseMeaning": "a. 坚定的, 踏实的, 固定的, 不变的",
+    "englishMeaning": "marked by firm determination or resolution",
+    "distractors": [
+      "the fifth and highest element after air and earth and fire and water",
+      "drug used to relieve or prevent spasms (especially of the smooth muscles)",
+      "large genus of erect or climbing prickly shrubs including roses",
+      "the person who plays that position on a football team",
+      "an expert manner of speaking involving control of voice and gesture",
+      "humanist specializing in classical scholarship"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "corpus",
+    "meaning": "n. (事物的)主体, 文集, 本金, 语料库\\n[医] 体",
+    "synonyms": [
+      "principal",
+      "principal sum"
+    ],
+    "chineseMeaning": "n. (事物的)主体, 文集, 本金, 语料库\\n[医] 体",
+    "englishMeaning": "capital as contrasted with the income derived from it",
+    "distractors": [
+      "stingy hoarder of money and possessions (often living miserably)",
+      "watery solution of sugars, salts, and minerals that circulates through the vascular system of a plant",
+      "rotating mechanism in the form of a universally mounted spinning wheel that offers resistance to turns in any direction",
+      "characterized by diligent study and fondness for reading",
+      "the reduction of the value of an asset by prorating its cost over a period of years",
+      "one who does not side with any party in a war or dispute"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "pedigree",
+    "meaning": "n. 血统, 家谱, 名门世系\\n[法] 家系, 出身, 血统",
+    "synonyms": [
+      "lineage",
+      "line",
+      "line of descent",
+      "descent",
+      "bloodline",
+      "blood line"
+    ],
+    "chineseMeaning": "n. 血统, 家谱, 名门世系\\n[法] 家系, 出身, 血统",
+    "englishMeaning": "the descendants of one individual",
+    "distractors": [
+      "man who has been castrated and is incapable of reproduction",
+      "not responsive to physical stimuli",
+      "something that can serve as a source of light",
+      "mental state of extreme emotional disturbance",
+      "being up to particular standard or level especially in being up to date in knowledge",
+      "the outer or front court of a building or of a group of buildings"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "ministry",
+    "meaning": "n. 部, 内阁, 服务\\n[经] 部",
+    "synonyms": [],
+    "chineseMeaning": "n. 部, 内阁, 服务\\n[经] 部",
+    "englishMeaning": "religious ministers collectively (especially Presbyterian)",
+    "distractors": [
+      "phrase that can function as the subject or object of a verb",
+      "any venturesome undertaking especially one with an uncertain outcome",
+      "periodical that is published every quarter (or four issues per year)",
+      "relating to or exhibiting both female and male sex organs but with a predominantly female appearance",
+      "cause to spread or flush or flood through, over, or across",
+      "the act of contributing to the funds of a church or charity"
+    ],
+    "paragraph": 5
+  },
+  {
+    "word": "acquiesce",
+    "meaning": "vi. 默许, 默然同意",
+    "synonyms": [
+      "assent",
+      "accede"
+    ],
+    "chineseMeaning": "vi. 默许, 默然同意",
+    "englishMeaning": "to agree or express agreement",
+    "distractors": [
+      "the capacity to understand a broad range of topics",
+      "not subject to the control of the will",
+      "deceitful and unreliable scoundrel",
+      "light sharp contact (usually with something flexible)",
+      "change in outward structure or looks",
+      "resembling or made of or suggestive of flowers"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "manacle",
+    "meaning": "n. 手铐, 束缚\\nvt. 给...上手铐, 束缚",
+    "synonyms": [
+      "handcuff",
+      "cuff",
+      "handlock"
+    ],
+    "chineseMeaning": "n. 手铐, 束缚\\nvt. 给...上手铐, 束缚",
+    "englishMeaning": "shackle that consists of a metal loop that can be locked around the wrist",
+    "distractors": [
+      "treatment for addiction to drugs or alcohol intended to remove the physiological effects of the addictive substances",
+      "American Revolutionary leader from Virginia whose objections led to the drafting of the Bill of Rights (1725-1792)",
+      "any of several aromatic herbs or subshrubs of the genus Satureja having spikes of flowers attractive to bees",
+      "the faculty and students of a school specializing in one of the fine arts",
+      "the part of a modern theater stage between the curtain and the orchestra (i.e., in front of the curtain)",
+      "charge against a citizen's person or property or activity for the support of government"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "determination",
+    "meaning": "n. 决心, 果断\\n[化] 判定; 测定",
+    "synonyms": [
+      "finding"
+    ],
+    "chineseMeaning": "n. 决心, 果断\\n[化] 判定; 测定",
+    "englishMeaning": "the act of determining the properties of something, usually by research or calculation",
+    "distractors": [
+      "befitting or characteristic of those who incline to social exclusiveness and who rebuff the advances of people considered inferior",
+      "(psychology) a person concerned more with practical realities than with inner thoughts and feelings",
+      "that which is perceived or known or inferred to have its own distinct existence (living or nonliving)",
+      "an emblem (a small piece of plastic or cloth or metal) that signifies your status (rank or membership or affiliation etc.)",
+      "an additional charge (as for items previously omitted or as a penalty for failure to exercise common caution or common skill)",
+      "(Greek mythology) fire-breathing female monster with a lion's head and a goat's body and a serpent's tail"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "beholden",
+    "meaning": "a. 负有义务的, 受惠的",
+    "synonyms": [
+      "beholden(p)"
+    ],
+    "chineseMeaning": "a. 负有义务的, 受惠的",
+    "englishMeaning": "under a moral obligation to someone",
+    "distractors": [
+      "lacking refinement or cultivation or taste",
+      "lack of physical or intellectual ability or qualifications",
+      "enter upon an activity or enterprise",
+      "marked by harshly abusive criticism",
+      "one who adheres to traditional views",
+      "brilliant solo passage occurring near the end of a piece of music"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "prerogative",
+    "meaning": "n. 特权, 君权, 职权\\na. 特权的, 行使特权的",
+    "synonyms": [
+      "privilege",
+      "perquisite",
+      "exclusive right"
+    ],
+    "chineseMeaning": "n. 特权, 君权, 职权\\na. 特权的, 行使特权的",
+    "englishMeaning": "right reserved exclusively by a particular person or group (especially a hereditary or official right)",
+    "distractors": [
+      "mixture of two partially miscible liquids A and B produces two conjugate solutions: one of A in B and another of B in A",
+      "any of various types of fold formed by doubling fabric back upon itself and then pressing or stitching into shape",
+      "any of several chemical elements that are usually shiny solids that conduct heat or electricity and can be formed into sheets etc.",
+      "remove impurities from, increase the concentration of, and separate through the process of distillation",
+      "Roman Catholic who advocates ultramontanism (supreme papal authority in matters of faith and discipline)",
+      "person who takes part in an armed rebellion against the constituted authority (especially in the hope of improving conditions)"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "talisman",
+    "meaning": "n. 护身符, 驱邪物, 法宝",
+    "synonyms": [
+      "amulet"
+    ],
+    "chineseMeaning": "n. 护身符, 驱邪物, 法宝",
+    "englishMeaning": "trinket or piece of jewelry usually hung about the neck and thought to be a magical protection against evil or disease",
+    "distractors": [
+      "(Roman Catholic Church) an official in charge of an ecclesiastical province acting under the superior general of a religious order",
+      "the branch of anthropology that deals with the division of humankind into races and with their origins and distribution and distinctive characteristics",
+      "marked by deliberate deceptiveness especially by pretending one set of feelings and acting under the influence of another",
+      "(Roman Catholic Church) a person who repents for wrongdoing (a Roman Catholic may be admitted to penance under the direction of a confessor)",
+      "two words are homophones if they are pronounced the same way but differ in meaning or spelling or both (e.g. bare and bear)",
+      "member of an ancient Jewish sect in Judea in the first century who fought to the death against the Romans and who killed or persecuted Jews who collaborated with the Romans"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "tergiversation",
+    "meaning": "n. 搪塞, 背叛, 变节",
+    "synonyms": [
+      "equivocation"
+    ],
+    "chineseMeaning": "n. 搪塞, 背叛, 变节",
+    "englishMeaning": "falsification by means of vague or ambiguous language",
+    "distractors": [
+      "establish after a calculation, investigation, experiment, survey, or study",
+      "the branch of medicine that deals with the diseases and hygiene of women",
+      "superior skill that you can learn by study and practice and observation",
+      "someone who believes and helps to spread the doctrine of another",
+      "muzzle-loading high-angle gun with a short barrel that fires shells at high elevations for a short range",
+      "touch (a body part) lightly so as to excite the surface nerves and cause uneasiness, laughter, or spasmodic movements"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "hagiographic",
+    "meaning": "圣徒传记的\\n《圣录》的\\n理想化(或偶像化)的",
+    "synonyms": [],
+    "chineseMeaning": "圣徒传记的\\n《圣录》的\\n理想化(或偶像化)的",
+    "englishMeaning": "(by extension) Uncritically reverent",
+    "distractors": [
+      "inclined to shake as from weakness or defect",
+      "gabled extension built out from a sloping roof to accommodate a vertical window",
+      "petty or reluctant in giving or spending",
+      "temporary leave of absence from military duty",
+      "consonant produced through the nose with the mouth closed",
+      "water that has condensed on a cool surface overnight from water vapor in the air"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "courtesy",
+    "meaning": "n. 礼貌, 谦恭, 好意\\n[法] 优待, 礼貌, 恩惠",
+    "synonyms": [],
+    "chineseMeaning": "n. 礼貌, 谦恭, 好意\\n[法] 优待, 礼貌, 恩惠",
+    "englishMeaning": "courteous or respectful or considerate act",
+    "distractors": [
+      "meeting planned at a certain time and place",
+      "having material or physical form or substance",
+      "sketchy summary of the main points of an argument or theory",
+      "requisition forcibly, as of enemy property",
+      "person who takes part in an armed rebellion against the constituted authority (especially in the hope of improving conditions)",
+      "metric unit of volume or capacity equal to 1000 liters"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "pusillanimous",
+    "meaning": "a. 无勇气的, 胆怯的, 优柔寡断的",
+    "synonyms": [
+      "poor-spirited",
+      "unmanly"
+    ],
+    "chineseMeaning": "a. 无勇气的, 胆怯的, 优柔寡断的",
+    "englishMeaning": "lacking in courage and manly strength and resolution",
+    "distractors": [
+      "the news as presented by reporters for newspapers or radio or television",
+      "of or relating to a physical injury or wound to the body",
+      "an edge tool with a flat steel blade with a cutting edge",
+      "member of the working class (not necessarily employed)",
+      "the act of adjusting again (to changed circumstances)",
+      "the branch of astrophysics that studies the origin and evolution and structure of the universe"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "academy",
+    "meaning": "n. 学院, 院校, 学会",
+    "synonyms": [],
+    "chineseMeaning": "n. 学院, 院校, 学会",
+    "englishMeaning": "secondary school (usually private)",
+    "distractors": [
+      "an arrangement of points or particles or objects in a regular periodic pattern in 2 or 3 dimensions",
+      "depository containing historical records and documents",
+      "productive or conducive to producing in abundance",
+      "drench or submerge or be drenched or submerged",
+      "place of worship that has its own altar",
+      "strange in an interesting or pleasing way"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "bonhomie",
+    "meaning": "n. 愉快, 温和, 和蔼",
+    "synonyms": [
+      "affability",
+      "affableness",
+      "amiability",
+      "amiableness",
+      "geniality"
+    ],
+    "chineseMeaning": "n. 愉快, 温和, 和蔼",
+    "englishMeaning": "disposition to be friendly and approachable (easy to talk to)",
+    "distractors": [
+      "compensation received by virtue of holding an office or having employment (usually in the form of wages or fees)",
+      "formal ball held for a school class toward the end of the academic year",
+      "disorder of digestive function characterized by discomfort or heartburn or nausea",
+      "despite anything to the contrary (usually following a concession)",
+      "gabled extension built out from a sloping roof to accommodate a vertical window",
+      "soft spongelike central cylinder of the stems of most flowering plants"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "galley",
+    "meaning": "n. 战舰, 军舰",
+    "synonyms": [],
+    "chineseMeaning": "n. 战舰, 军舰",
+    "englishMeaning": "large medieval vessel with a single deck propelled by sails and oars with guns at stern and prow",
+    "distractors": [
+      "tall marsh plant with cylindrical seed heads that explode when mature shedding large quantities of down",
+      "the reasoning involved in drawing a conclusion or making a logical judgment on the basis of circumstantial evidence and prior conclusions rather than on the basis of direct observation",
+      "an ability to understand the meaning or importance of something (or the knowledge acquired as a result)",
+      "mammals of which the females have a pouch (the marsupium) containing the teats where the young are fed and carried",
+      "person who is the aim of an attack (especially a victim of ridicule or exploitation) by some hostile person or influence",
+      "North American republic containing 50 states - 48 conterminous states in North America plus Alaska in northwest North America and the Hawaiian Islands in the Pacific Ocean"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "impede",
+    "meaning": "vt. 妨碍, 阻碍, 阻止",
+    "synonyms": [
+      "hinder"
+    ],
+    "chineseMeaning": "vt. 妨碍, 阻碍, 阻止",
+    "englishMeaning": "be a hindrance or obstacle to",
+    "distractors": [
+      "political orientation that favors social progress by reform and by changing laws rather than by revolution",
+      "incapable of being made smaller or simpler",
+      "(East Indian cookery) a pungent dish of vegetables or meats flavored with curry powder and usually eaten with rice",
+      "the process of producing a chemical compound (usually by the union of simpler chemical compounds)",
+      "of or pertaining to the nature of a tort",
+      "creating a favorable impression"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "antiquated",
+    "meaning": "a. 陈旧的, 过时的, 年老的",
+    "synonyms": [
+      "antediluvian",
+      "archaic"
+    ],
+    "chineseMeaning": "a. 陈旧的, 过时的, 年老的",
+    "englishMeaning": "so extremely old as seeming to belong to an earlier period",
+    "distractors": [
+      "(Greek mythology) the goddess of divine retribution and vengeance",
+      "narrow band of elastic rubber used to hold things (such as papers) together",
+      "chemical compound that is added to protect against decay or decomposition",
+      "an organism of the kingdom Fungi lacking chlorophyll and feeding on organic matter",
+      "contract granting the right to operate a subsidiary business",
+      "the cheerful feeling you have when nothing is troubling you"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "flummoxed",
+    "meaning": "v. <口>使困惑, 使慌乱( flummox的过去式和过去分词 )",
+    "synonyms": [
+      "perplex",
+      "vex",
+      "stick",
+      "get",
+      "puzzle",
+      "mystify"
+    ],
+    "chineseMeaning": "v. <口>使困惑, 使慌乱( flummox的过去式和过去分词 )",
+    "englishMeaning": "be a mystery or bewildering to",
+    "distractors": [
+      "Drawing, writing or inscription on stone, as a painting on a cave wall.",
+      "narrative telling the adventures of a hero or a family",
+      "an asset of special worth or utility",
+      "pause during which things are calm or activities are diminished",
+      "powerful and effective language",
+      "the act of persuading (or attempting to persuade)"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "warranted",
+    "meaning": "a. 担保的；保证的",
+    "synonyms": [
+      "warrant"
+    ],
+    "chineseMeaning": "a. 担保的；保证的",
+    "englishMeaning": "writ from a court commanding police to perform specified acts",
+    "distractors": [
+      "cosmetics applied to the face to improve or change your appearance",
+      "an inclination to evaluate reality exclusively in terms of human values",
+      "two successive letters (especially two letters used to represent a single sound: `sh' in `shoe')",
+      "merchandise issued for sale or public showing (especially a record or film)",
+      "bring back into original existence, use, function, or position",
+      "force into some kind of situation, condition, or course of action"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "sect",
+    "meaning": "n. 宗派, 教派",
+    "synonyms": [
+      "religious sect",
+      "religious order"
+    ],
+    "chineseMeaning": "n. 宗派, 教派",
+    "englishMeaning": "subdivision of a larger religious group",
+    "distractors": [
+      "gymnastic horse without pommels and with one end elongated",
+      "take or consume (regularly or habitually)",
+      "cause to grow together parts from different plants",
+      "an event that occurs when something passes from one state or phase to another",
+      "toxic nonmetallic element related to sulfur and tellurium",
+      "group of three men responsible for public administration or civil authority"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "grunt",
+    "meaning": "vi. 作呼噜声\\nvt. 咕哝\\nn. 呼噜声, 咕哝",
+    "synonyms": [
+      "oink"
+    ],
+    "chineseMeaning": "vi. 作呼噜声\\nvt. 咕哝\\nn. 呼噜声, 咕哝",
+    "englishMeaning": "the short low gruff noise of the kind made by hogs",
+    "distractors": [
+      "small conical pouch projecting from the upper anterior part of each atrium of the heart",
+      "gradually deprive (infants and young mammals) of mother's milk",
+      "person apparently sensitive to things beyond the natural range of perception",
+      "hard natural coal that burns slowly and gives intense heat",
+      "the trait of great self-denial (especially refraining from worldly pleasures)",
+      "the property of being physically or mentally strong"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "recite",
+    "meaning": "v. 背诵, 朗读, 叙述",
+    "synonyms": [
+      "declaim"
+    ],
+    "chineseMeaning": "v. 背诵, 朗读, 叙述",
+    "englishMeaning": "recite in elocution",
+    "distractors": [
+      "recognition of meritorious service",
+      "get by special effort",
+      "the repetition of similar vowels in the stressed syllables of successive words",
+      "the form of a literary work submitted for publication",
+      "hinder or prevent the progress or accomplishment of",
+      "Paired with quid, in reference to the phrase quid pro quo (“this for that”): something given in exchange for something else."
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "surveyor",
+    "meaning": "n. 测量员；检验员",
+    "synonyms": [],
+    "chineseMeaning": "n. 测量员；检验员",
+    "englishMeaning": "an engineer who determines the boundaries and elevations of land or structures",
+    "distractors": [
+      "English term for a dry sharp-tasting ale with strong flavor of hops (usually on draft)",
+      "the magnitude of something in a particular direction (especially length or width or height)",
+      "(computer science) electronic equipment connected by cable to the CPU of a computer",
+      "make (someone) agree, understand, or realize the truth or validity of something",
+      "writ issued by court authority to compel the attendance of a witness at a judicial proceeding",
+      "the complex of all the attributes--behavioral, temperamental, emotional and mental--that characterize a unique individual"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "throes",
+    "meaning": "n. 阵痛, 临死的苦痛, 垂死的挣扎, 剧痛, 痛苦, 苦闷, 苦难, 艰苦的奋斗",
+    "synonyms": [],
+    "chineseMeaning": "n. 阵痛, 临死的苦痛, 垂死的挣扎, 剧痛, 痛苦, 苦闷, 苦难, 艰苦的奋斗",
+    "englishMeaning": "violent pangs of suffering",
+    "distractors": [
+      "the remains of something that has been destroyed or broken up",
+      "rocket carrying a warhead of conventional or nuclear explosives",
+      "passing reference or indirect mention",
+      "one or more recordings issued together",
+      "fall down, as if collapsing",
+      "of or relating to or containing iron"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "soak",
+    "meaning": "n. 浸, 湿透, 大雨\\nvt. 使上下湿透, 浸, 吸入, 吸收, 浸洗掉\\nvi. 浸泡, 渗透",
+    "synonyms": [
+      "soakage",
+      "soaking"
+    ],
+    "chineseMeaning": "n. 浸, 湿透, 大雨\\nvt. 使上下湿透, 浸, 吸入, 吸收, 浸洗掉\\nvi. 浸泡, 渗透",
+    "englishMeaning": "the process of becoming softened and saturated as a consequence of being immersed in water (or other liquid)",
+    "distractors": [
+      "legal right to use and derive profit from property belonging to someone else provided that the property itself is not injured in any way",
+      "the most common computer memory which can be used by programs to perform necessary tasks while the computer is on",
+      "the surrender of an accused or convicted person by one state or country to another (usually under the provisions of a statute or treaty)",
+      "amounts paid for goods and services that may be currently tax deductible (as opposed to capital expenditures)",
+      "cord that is drawn through eyelets or around hooks in order to draw together two edges (as of a shoe or garment)",
+      "sea nymph (part woman and part bird) supposed to lure sailors to destruction on the rocks where the nymphs lived"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "rapacious",
+    "meaning": "a. 强夺的, 贪欲的, 贪婪的",
+    "synonyms": [
+      "predatory",
+      "raptorial",
+      "ravening",
+      "vulturine",
+      "vulturous"
+    ],
+    "chineseMeaning": "a. 强夺的, 贪欲的, 贪婪的",
+    "englishMeaning": "living by preying on other animals especially by catching living prey",
+    "distractors": [
+      "an abatement in intensity or degree (as in the manifestations of a disease)",
+      "coffeepot in which boiling water ascends through a central tube and filters back down through a basket of ground coffee beans",
+      "(Hinduism and Buddhism) the beatitude that transcends the cycle of reincarnation",
+      "usually brightly colored zygodactyl tropical birds with short hooked beaks and the ability to mimic sounds",
+      "the magnitude of something in a particular direction (especially length or width or height)",
+      "person (especially a lawyer or politician) who uses unscrupulous or unethical methods"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "defect",
+    "meaning": "n. 缺点\\n[医] 缺损, 缺陷",
+    "synonyms": [],
+    "chineseMeaning": "n. 缺点\\n[医] 缺损, 缺陷",
+    "englishMeaning": "an imperfection in a bodily system",
+    "distractors": [
+      "someone who claims a benefit or right or title",
+      "disposition free from stress or emotion",
+      "representation of common ground between theories or phenomena",
+      "someone who is skilled at analyzing data",
+      "line generated by a point on a circle rolling around another circle",
+      "tubular acoustic device inserted in the exhaust system that is designed to reduce noise"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "ballet",
+    "meaning": "n. 芭蕾舞",
+    "synonyms": [
+      "concert dance"
+    ],
+    "chineseMeaning": "n. 芭蕾舞",
+    "englishMeaning": "theatrical representation of a story that is performed to music by trained dancers",
+    "distractors": [
+      "any of the lymphatic vessels that convey chyle from the small intestine to the thoracic duct",
+      "someone who makes predictions of the future (usually on the basis of special knowledge)",
+      "(used especially of glances) directed to one side with or as if with doubt or suspicion or envy",
+      "the desired mineral that is left after impurities have been removed from mined ore",
+      "(used of persons or behavior) characterized by or indicative of lack of generosity",
+      "pseudoscience claiming divination by the positions of the planets and sun and moon"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "guile",
+    "meaning": "n. 狡猾, 狡计",
+    "synonyms": [
+      "craft",
+      "craftiness",
+      "cunning",
+      "foxiness",
+      "slyness",
+      "wiliness"
+    ],
+    "chineseMeaning": "n. 狡猾, 狡计",
+    "englishMeaning": "shrewdness as demonstrated by being skilled in deception",
+    "distractors": [
+      "slide of large masses of snow and ice and mud down a mountain",
+      "straight line or plane that touches a curve or curved surface at a point but does not intersect it at that point",
+      "pointed tool for marking surfaces or for punching small holes",
+      "male religious living in a cloister and devoting himself to contemplation and prayer and work",
+      "an actor's line that immediately precedes and serves as a reminder for some action or speech",
+      "person who has returned to the country of origin or whose citizenship has been restored"
+    ],
+    "paragraph": 6
+  },
+  {
+    "word": "pathetic",
+    "meaning": "a. 悲哀的, 可怜的, 感伤的, 差劲的\\n[医] 感情的",
+    "synonyms": [
+      "hapless",
+      "miserable",
+      "misfortunate",
+      "piteous",
+      "pitiable",
+      "pitiful"
+    ],
+    "chineseMeaning": "a. 悲哀的, 可怜的, 感伤的, 差劲的\\n[医] 感情的",
+    "englishMeaning": "deserving or inciting pity",
+    "distractors": [
+      "unit of apothecary weight equal to 20 grains",
+      "someone who refuses to conform to established standards of conduct",
+      "sturdy and strong in form, constitution, or construction",
+      "inspiring mixed contempt and pity",
+      "symptom of rabies in humans consisting of an aversion to swallowing liquids",
+      "support usually of stone or brick"
+    ],
+    "paragraph": 6
+  }
+]

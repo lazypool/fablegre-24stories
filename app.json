@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "FableGRE: 24 Stories",
+    "slug": "fablegre-24stories",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "com.fablegre.stories24",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.fablegre.stories24",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-asset",
+        {
+          "assets": [
+            "./data/stories",
+            "./data/words"
+          ]
+        }
+      ]
+    ],
+    "assetBundlePatterns": [
+      "data/**/*"
+    ]
+  }
+}
