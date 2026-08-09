@@ -46,5 +46,11 @@ function AppNavigation() {
 }
 
 export default function App() {
-  return <ThemeProvider><PageScrollProvider><AppNavigation /></PageScrollProvider></ThemeProvider>;
+  return (
+    <ThemeProvider>
+      <PageScrollProvider>
+        <AppNavigation />
+      </PageScrollProvider>
+    </ThemeProvider>
+  );
 }

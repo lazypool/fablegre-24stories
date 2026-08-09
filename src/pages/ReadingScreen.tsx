@@ -59,7 +59,15 @@ export default function ReadingScreen() {
   return (
     <View className="flex-1 bg-slate-50">
       <View style={{ backgroundColor: 'transparent', height: 3, width: '100%' }}>
-        <View style={{ backgroundColor: theme.color, height: '100%', transform: [{ scaleX: readingProgress }], transformOrigin: 'left', width: '100%' }} />
+        <View
+          style={{
+            backgroundColor: theme.color,
+            height: '100%',
+            transform: [{ scaleX: readingProgress }],
+            transformOrigin: 'left',
+            width: '100%',
+          }}
+        />
       </View>
       <FlatList
         ref={listRef}
@@ -69,8 +77,12 @@ export default function ReadingScreen() {
         maxToRenderPerBatch={story.length || 1}
         removeClippedSubviews={false}
         keyExtractor={(paragraph, index) => `${selectedStory.id}-${index}-${paragraph.english.slice(0, 24)}`}
-        ListEmptyComponent={error ? <Text className="text-[15px] text-red-700">{error}</Text> : <ActivityIndicator color={theme.color} />}
-        ListHeaderComponent={<Text className="mb-7 text-3xl font-bold tracking-normal text-slate-900">{selectedStory.title}</Text>}
+        ListEmptyComponent={
+          error ? <Text className="text-[15px] text-red-700">{error}</Text> : <ActivityIndicator color={theme.color} />
+        }
+        ListHeaderComponent={
+          <Text className="mb-7 text-3xl font-bold tracking-normal text-slate-900">{selectedStory.title}</Text>
+        }
         contentContainerStyle={{ padding: 24 }}
         scrollEnabled={!isLoading}
         showsVerticalScrollIndicator={false}

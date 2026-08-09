@@ -43,12 +43,25 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
     return (
       <Pressable
         accessibilityLabel="切换小说"
-        style={{ alignItems: 'center', alignSelf: 'center', height: HANDLE_HEIGHT, justifyContent: 'center', width: 54 }}
+        style={{
+          alignItems: 'center',
+          alignSelf: 'center',
+          height: HANDLE_HEIGHT,
+          justifyContent: 'center',
+          width: 54,
+        }}
         onPress={onToggle}
       >
         <Svg height={HANDLE_HEIGHT} style={{ position: 'absolute' }} viewBox="0 0 54 24" width={54}>
           {!expanded ? <Path d="M9 0h36l9 24H0Z" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth={1} /> : null}
-          <Path d={expanded ? 'm21 9 6 7 6-7' : 'm21 15 6-7 6 7'} fill="none" stroke="#334155" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} />
+          <Path
+            d={expanded ? 'm21 9 6 7 6-7' : 'm21 15 6-7 6 7'}
+            fill="none"
+            stroke="#334155"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.8}
+          />
         </Svg>
       </Pressable>
     );
@@ -63,7 +76,10 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
   }
 
   return (
-    <Animated.View className="rounded-t-[24px] bg-slate-50" style={{ borderTopColor: '#CBD5E1', borderTopWidth: 1, height, overflow: 'hidden' }}>
+    <Animated.View
+      className="rounded-t-[24px] bg-slate-50"
+      style={{ borderTopColor: '#CBD5E1', borderTopWidth: 1, height, overflow: 'hidden' }}
+    >
       <DrawerHandle expanded={isOpen} />
       <View onLayout={handleContentLayout} style={{ paddingBottom: 12, paddingHorizontal: 24 }}>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -71,7 +87,13 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
             <View key={story.id} style={{ aspectRatio: 1, overflow: 'hidden', padding: 5, width: '12.5%' }}>
               <Pressable
                 className="flex-1 items-center justify-center rounded-xl"
-                style={{ alignItems: 'center', backgroundColor: story.id === selectedStoryId ? theme.color : '#E2E8F0', borderRadius: 12, borderWidth: 0, justifyContent: 'center' }}
+                style={{
+                  alignItems: 'center',
+                  backgroundColor: story.id === selectedStoryId ? theme.color : '#E2E8F0',
+                  borderRadius: 12,
+                  borderWidth: 0,
+                  justifyContent: 'center',
+                }}
                 onPress={() => onSelect(story)}
               >
                 <Text className="text-sm font-bold" style={{ color: '#FFFFFF' }}>

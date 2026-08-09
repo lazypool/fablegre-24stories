@@ -36,6 +36,9 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# husky
+.husky/_
+
 # generated native folders
 /ios
 /android

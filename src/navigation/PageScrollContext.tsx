@@ -12,11 +12,15 @@ export function PageScrollProvider({ children }: PropsWithChildren) {
   const [isScrolled, setScrolled] = useState(false);
   const [scrollToTop, setScrollToTop] = useState<() => void>(() => () => {});
   const setPageScroll = useCallback((nextIsScrolled: boolean, nextScrollToTop: () => void) => {
-    setScrolled((current) => current === nextIsScrolled ? current : nextIsScrolled);
+    setScrolled((current) => (current === nextIsScrolled ? current : nextIsScrolled));
     setScrollToTop(() => nextScrollToTop);
   }, []);
 
-  return <PageScrollContext.Provider value={{ isScrolled, scrollToTop, setPageScroll }}>{children}</PageScrollContext.Provider>;
+  return (
+    <PageScrollContext.Provider value={{ isScrolled, scrollToTop, setPageScroll }}>
+      {children}
+    </PageScrollContext.Provider>
+  );
 }
 
 export function usePageScroll() {

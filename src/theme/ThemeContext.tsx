@@ -12,7 +12,13 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: PropsWithChildren) {
   const [theme, setTheme] = useState(defaultTheme);
 
-  return <ThemeContext.Provider value={{ theme, setThemeName: (name) => setTheme(themes.find((item) => item.name === name) ?? defaultTheme) }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider
+      value={{ theme, setThemeName: (name) => setTheme(themes.find((item) => item.name === name) ?? defaultTheme) }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
 export function useTheme() {

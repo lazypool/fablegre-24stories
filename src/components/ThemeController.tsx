@@ -24,11 +24,18 @@ export default function ThemeController() {
   useEffect(() => {
     if (isScrolled) setOpen(false);
     setButtonAnimating(true);
-    Animated.spring(buttonOffset, { damping: 14, stiffness: 170, toValue: isScrolled ? -28 : 0, useNativeDriver: true }).start(() => setButtonAnimating(false));
+    Animated.spring(buttonOffset, {
+      damping: 14,
+      stiffness: 170,
+      toValue: isScrolled ? -28 : 0,
+      useNativeDriver: true,
+    }).start(() => setButtonAnimating(false));
   }, [buttonOffset, isScrolled]);
 
   return (
-    <Animated.View style={{ position: 'absolute', right: 16, top: 14, transform: [{ translateY: buttonOffset }], zIndex: 20 }}>
+    <Animated.View
+      style={{ position: 'absolute', right: 16, top: 14, transform: [{ translateY: buttonOffset }], zIndex: 20 }}
+    >
       <Pressable
         accessibilityLabel={isScrolled ? '回到顶部' : '调整主题'}
         disabled={isButtonAnimating}
@@ -37,12 +44,34 @@ export default function ThemeController() {
           if (isScrolled) scrollToTop();
           else setOpen((open) => !open);
         }}
-        style={{ alignItems: 'center', backgroundColor: theme.color, borderRadius: 14, height: 28, justifyContent: 'center', width: 28 }}
+        style={{
+          alignItems: 'center',
+          backgroundColor: theme.color,
+          borderRadius: 14,
+          height: 28,
+          justifyContent: 'center',
+          width: 28,
+        }}
       >
         <View style={{ backgroundColor: '#FFFFFF', borderRadius: 4, height: 10, width: 10 }} />
       </Pressable>
-      {isOpen ? <Pressable accessibilityLabel="关闭主题选择器" onPress={() => setOpen(false)} style={{ bottom: -9999, left: -9999, position: 'absolute', right: -9999, top: 28 }} /> : null}
-      <Animated.View pointerEvents={isOpen ? 'auto' : 'none'} style={{ opacity: popoverOpacity, position: 'absolute', right: 0, top: 36, transform: [{ scale: popoverScale }] }}>
+      {isOpen ? (
+        <Pressable
+          accessibilityLabel="关闭主题选择器"
+          onPress={() => setOpen(false)}
+          style={{ bottom: -9999, left: -9999, position: 'absolute', right: -9999, top: 28 }}
+        />
+      ) : null}
+      <Animated.View
+        pointerEvents={isOpen ? 'auto' : 'none'}
+        style={{
+          opacity: popoverOpacity,
+          position: 'absolute',
+          right: 0,
+          top: 36,
+          transform: [{ scale: popoverScale }],
+        }}
+      >
         <ThemePicker
           selectedTheme={theme.name}
           onSelect={(name) => {
