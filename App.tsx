@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { BookIcon, ExamIcon, GraduationCapIcon, NotebookIcon } from './src/components/TabIcons';
 import StoryDrawer from './src/components/StoryDrawer';
 import ThemeController from './src/components/ThemeController';
-import { stories } from './src/data/stories';
+import { preloadAllStories, stories } from './src/data/stories';
 import { PageScrollProvider } from './src/navigation/PageScrollContext';
 import { StoryProvider, useStory } from './src/navigation/StoryContext';
 import { WordProvider } from './src/navigation/WordContext';
@@ -82,6 +82,10 @@ function SharedStoryDrawer({
 }
 
 export default function App() {
+  useEffect(() => {
+    preloadAllStories();
+  }, []);
+
   return (
     <ThemeProvider>
       <PageScrollProvider>

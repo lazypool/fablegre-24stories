@@ -4,6 +4,8 @@ import { Platform } from 'react-native';
 
 import type { Story, StoryParagraph } from '../types/story';
 
+import { stories } from './assets';
+
 export { stories } from './assets';
 
 type ParsedStory = {
@@ -55,4 +57,10 @@ export function loadStory(story: Story): Promise<ParsedStory> {
 
   storyCache.set(story.id, task);
   return task;
+}
+
+export function preloadAllStories(): void {
+  for (const story of stories) {
+    void loadStory(story).catch(() => {});
+  }
 }
