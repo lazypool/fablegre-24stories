@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
-import StoryDrawer from '../components/StoryDrawer';
-import { loadStory, stories } from '../data/stories';
+import { loadStory } from '../data/stories';
 import { usePageScroll } from '../navigation/PageScrollContext';
+import { useStory } from '../navigation/StoryContext';
 import { useTheme } from '../theme/ThemeContext';
 import type { StoryParagraph } from '../types/story';
 
@@ -11,10 +11,8 @@ const HIDE_BUTTON_PROGRESS = 0.3;
 const SHOW_BUTTON_PROGRESS = 0.1;
 
 export default function ReadingScreen() {
-  const [selectedStory, setSelectedStory] = useState(stories[0]);
   const [story, setStory] = useState<StoryParagraph[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [readingProgress, setReadingProgress] = useState(0);
   const listRef = useRef<FlatList<StoryParagraph>>(null);
@@ -23,6 +21,7 @@ export default function ReadingScreen() {
   const maximumOffset = useRef<number | null>(null);
   const isButtonHidden = useRef(false);
   const { setPageScroll } = usePageScroll();
+  const { selectedStory } = useStory();
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -127,15 +126,6 @@ export default function ReadingScreen() {
             <Text className="text-base leading-7 text-slate-600">{item.chinese}</Text>
           </View>
         )}
-      />
-      <StoryDrawer
-        isOpen={isDrawerOpen}
-        selectedStoryId={selectedStory.id}
-        stories={stories}
-        onSelect={(story) => {
-          setSelectedStory(story);
-        }}
-        onToggle={() => setDrawerOpen((open) => !open)}
       />
     </View>
   );

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Pressable, View } from 'react-native';
+import { Animated, Platform, Pressable, View } from 'react-native';
 
 import { usePageScroll } from '../navigation/PageScrollContext';
 import { useTheme } from '../theme/ThemeContext';
@@ -16,8 +16,12 @@ export default function ThemeController() {
 
   useEffect(() => {
     Animated.parallel([
-      Animated.spring(popoverScale, { toValue: isOpen ? 1 : 0.8, useNativeDriver: true }),
-      Animated.timing(popoverOpacity, { toValue: isOpen ? 1 : 0, duration: 140, useNativeDriver: true }),
+      Animated.spring(popoverScale, { toValue: isOpen ? 1 : 0.8, useNativeDriver: Platform.OS !== 'web' }),
+      Animated.timing(popoverOpacity, {
+        toValue: isOpen ? 1 : 0,
+        duration: 140,
+        useNativeDriver: Platform.OS !== 'web',
+      }),
     ]).start();
   }, [isOpen, popoverOpacity, popoverScale]);
 
@@ -28,7 +32,7 @@ export default function ThemeController() {
       damping: 14,
       stiffness: 170,
       toValue: isScrolled ? -28 : 0,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== 'web',
     }).start(() => setButtonAnimating(false));
   }, [buttonOffset, isScrolled]);
 
@@ -63,9 +67,9 @@ export default function ThemeController() {
         />
       ) : null}
       <Animated.View
-        pointerEvents={isOpen ? 'auto' : 'none'}
         style={{
           opacity: popoverOpacity,
+          pointerEvents: isOpen ? 'auto' : 'none',
           position: 'absolute',
           right: 0,
           top: 36,

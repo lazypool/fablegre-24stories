@@ -69,7 +69,7 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
 
   if (!isMounted) {
     return (
-      <View pointerEvents="box-none" style={{ bottom: 0, left: 0, position: 'absolute', right: 0 }}>
+      <View style={{ bottom: 0, left: 0, pointerEvents: 'box-none', position: 'absolute', right: 0 }}>
         <DrawerHandle expanded={false} />
       </View>
     );
@@ -78,7 +78,7 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
   return (
     <Animated.View
       className="rounded-t-[24px] bg-slate-50"
-      style={{ borderTopColor: '#CBD5E1', borderTopWidth: 1, height, overflow: 'hidden' }}
+      style={{ backgroundColor: '#F8FAFC', borderTopColor: '#CBD5E1', borderTopWidth: 1, height, overflow: 'hidden' }}
     >
       <DrawerHandle expanded={isOpen} />
       <View onLayout={handleContentLayout} style={{ paddingBottom: 12, paddingHorizontal: 24 }}>

@@ -8,6 +8,10 @@ node_modules/
 dist/
 dist-android/
 dist-ios/
+dist-web/
+dist-android-verify/
+dist-ios-verify/
+dist-web-verify/
 web-build/
 expo-env.d.ts
 
