@@ -9,6 +9,7 @@ import ThemeController from './src/components/ThemeController';
 import { stories } from './src/data/stories';
 import { PageScrollProvider } from './src/navigation/PageScrollContext';
 import { StoryProvider, useStory } from './src/navigation/StoryContext';
+import { WordProvider } from './src/navigation/WordContext';
 import PlaceholderScreen from './src/pages/PlaceholderScreen';
 import ReadingScreen from './src/pages/ReadingScreen';
 import { ThemeProvider, useTheme } from './src/theme/ThemeContext';
@@ -85,7 +86,9 @@ export default function App() {
     <ThemeProvider>
       <PageScrollProvider>
         <StoryProvider>
-          <AppNavigation />
+          <WordProvider>
+            <AppNavigation />
+          </WordProvider>
         </StoryProvider>
       </PageScrollProvider>
     </ThemeProvider>
