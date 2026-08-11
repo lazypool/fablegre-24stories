@@ -51,3 +51,7 @@ yarn-error.*
 
 # playwright
 .playwright-mcp/
+
+# generated data (from generate.ts)
+src/data/all-stories.json
+src/data/all-words.json

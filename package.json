@@ -23,6 +23,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
+    "@types/node": "^26.2.0",
     "@types/react": "~19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.66.0",
     "@typescript-eslint/parser": "^8.66.0",
@@ -42,6 +43,9 @@
   },
   "scripts": {
     "prepare": "husky",
+    "generate": "npx tsx generate.ts",
+    "prestart": "npm run generate",
+    "preweb": "npm run generate",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",

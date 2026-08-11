@@ -1,14 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookIcon, ExamIcon, GraduationCapIcon, NotebookIcon } from './src/components/TabIcons';
 import StoryDrawer from './src/components/StoryDrawer';
 import ThemeController from './src/components/ThemeController';
-import { preloadAllStories, stories } from './src/data/stories';
-import { PageScrollProvider } from './src/navigation/PageScrollContext';
+import { stories } from './src/data/stories';
 import { StoryProvider, useStory } from './src/navigation/StoryContext';
 import { TabBarHeightProvider, useTabBarHeight } from './src/navigation/TabBarHeightContext';
 import { WordProvider } from './src/navigation/WordContext';
@@ -32,7 +31,7 @@ function AppNavigation() {
     <NavigationContainer onStateChange={(state) => setActiveTab(state?.routes[state.index]?.name ?? 'Read')}>
       <StatusBar style="dark" />
       <View style={{ paddingTop: insets.top }} className="flex-1">
-        <ThemeController activeTab={activeTab} />
+        <ThemeController activeTab={activeTab} selectedStoryId={selectedStory.id} />
         <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: theme.color }}>
           <Tab.Screen
             name="Read"
@@ -86,22 +85,16 @@ function SharedStoryDrawer({
 }
 
 export default function App() {
-  useEffect(() => {
-    preloadAllStories();
-  }, []);
-
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <PageScrollProvider>
-          <StoryProvider>
-            <WordProvider>
-              <TabBarHeightProvider>
-                <AppNavigation />
-              </TabBarHeightProvider>
-            </WordProvider>
-          </StoryProvider>
-        </PageScrollProvider>
+        <StoryProvider>
+          <WordProvider>
+            <TabBarHeightProvider>
+              <AppNavigation />
+            </TabBarHeightProvider>
+          </WordProvider>
+        </StoryProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

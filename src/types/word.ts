@@ -1,5 +1,3 @@
-export type WordChunkId = `chunk_${string}`;
-
 export type WordRecord = {
   word: string;
   meaning: string;

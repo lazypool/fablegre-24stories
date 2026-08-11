@@ -1,19 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Platform, Pressable, View } from 'react-native';
 
-import { usePageScroll } from '../navigation/PageScrollContext';
 import { useTheme } from '../theme/ThemeContext';
 import ThemePicker from './ThemePicker';
 
-export default function ThemeController({ activeTab }: { activeTab: string }) {
+const BUTTON_SIZE = 28;
+
+export default function ThemeController({
+  activeTab,
+  selectedStoryId,
+}: {
+  activeTab: string;
+  selectedStoryId: string;
+}) {
   const [isOpen, setOpen] = useState(false);
   const { theme, setThemeName } = useTheme();
-  const { isScrolled, scrollToTop } = usePageScroll();
   const popoverScale = useRef(new Animated.Value(0.8)).current;
   const popoverOpacity = useRef(new Animated.Value(0)).current;
-  const buttonOffset = useRef(new Animated.Value(0)).current;
-  const [isButtonAnimating, setButtonAnimating] = useState(false);
-  const shouldHide = activeTab === 'Read' && isScrolled;
+
+  useEffect(() => {
+    setOpen(false);
+  }, [activeTab, selectedStoryId]);
 
   useEffect(() => {
     Animated.parallel([
@@ -26,36 +33,18 @@ export default function ThemeController({ activeTab }: { activeTab: string }) {
     ]).start();
   }, [isOpen, popoverOpacity, popoverScale]);
 
-  useEffect(() => {
-    if (shouldHide) setOpen(false);
-    setButtonAnimating(true);
-    Animated.spring(buttonOffset, {
-      damping: 14,
-      stiffness: 170,
-      toValue: shouldHide ? -28 : 0,
-      useNativeDriver: Platform.OS !== 'web',
-    }).start(() => setButtonAnimating(false));
-  }, [buttonOffset, shouldHide]);
-
   return (
-    <Animated.View
-      style={{ position: 'absolute', right: 16, top: 14, transform: [{ translateY: buttonOffset }], zIndex: 20 }}
-    >
+    <View style={{ position: 'absolute', right: 16, top: 14, zIndex: 20 }}>
       <Pressable
-        accessibilityLabel={shouldHide ? '回到顶部' : '调整主题'}
-        disabled={isButtonAnimating}
-        onPress={() => {
-          if (isButtonAnimating) return;
-          if (shouldHide) scrollToTop();
-          else setOpen((open) => !open);
-        }}
+        accessibilityLabel="调整主题"
+        onPress={() => setOpen((open) => !open)}
         style={{
           alignItems: 'center',
           backgroundColor: theme.color,
-          borderRadius: 14,
-          height: 28,
+          borderRadius: BUTTON_SIZE / 2,
+          height: BUTTON_SIZE,
           justifyContent: 'center',
-          width: 28,
+          width: BUTTON_SIZE,
         }}
       >
         <View style={{ backgroundColor: '#FFFFFF', borderRadius: 4, height: 10, width: 10 }} />
@@ -64,7 +53,7 @@ export default function ThemeController({ activeTab }: { activeTab: string }) {
         <Pressable
           accessibilityLabel="关闭主题选择器"
           onPress={() => setOpen(false)}
-          style={{ bottom: -9999, left: -9999, position: 'absolute', right: -9999, top: 28 }}
+          style={{ bottom: -9999, left: -9999, position: 'absolute', right: -9999, top: BUTTON_SIZE }}
         />
       ) : null}
       <Animated.View
@@ -73,7 +62,7 @@ export default function ThemeController({ activeTab }: { activeTab: string }) {
           pointerEvents: isOpen ? 'auto' : 'none',
           position: 'absolute',
           right: 0,
-          top: 36,
+          top: BUTTON_SIZE + 8,
           transform: [{ scale: popoverScale }],
         }}
       >
@@ -85,6 +74,6 @@ export default function ThemeController({ activeTab }: { activeTab: string }) {
           }}
         />
       </Animated.View>
-    </Animated.View>
+    </View>
   );
 }
