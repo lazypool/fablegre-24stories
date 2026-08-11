@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, FlatList, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, Animated, FlatList, Text, View } from 'react-native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import WordMeaningCard from '../components/WordMeaningCard';
 import { loadReadingProgress, saveReadingProgress } from '../data/readingProgress';
 import { loadStory } from '../data/stories';
 import { usePageScroll } from '../navigation/PageScrollContext';
 import { useStory } from '../navigation/StoryContext';
+import { useTabBarHeight } from '../navigation/TabBarHeightContext';
 import { useWordBank } from '../navigation/WordContext';
 import { useTheme } from '../theme/ThemeContext';
 import type { StoryParagraph } from '../types/story';
@@ -56,6 +58,7 @@ export default function ReadingScreen() {
   const { selectedStory } = useStory();
   const { lookupWord, prefetchForParagraph } = useWordBank();
   const { theme } = useTheme();
+  const { setTabBarHeight } = useTabBarHeight();
   const [selectedRecord, setSelectedRecord] = useState<WordRecord | null>(null);
   const [loadingWord, setLoadingWord] = useState<string | null>(null);
   const latestWordRef = useRef<string | null>(null);
@@ -63,6 +66,11 @@ export default function ReadingScreen() {
   const flashValue = useRef(new Animated.Value(0)).current;
   const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefetchedParagraph = useRef(-1);
+  const tabBarHeight = useBottomTabBarHeight();
+
+  useEffect(() => {
+    setTabBarHeight(tabBarHeight);
+  }, [tabBarHeight, setTabBarHeight]);
 
   const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: { index: number | null }[] }) => {
     const firstVisible = viewableItems[0];
@@ -114,8 +122,8 @@ export default function ReadingScreen() {
     });
   }
 
-  const flashBorderColor = useMemo(
-    () => flashValue.interpolate({ inputRange: [0, 1], outputRange: ['transparent', theme.color] }),
+  const flashTextColor = useMemo(
+    () => flashValue.interpolate({ inputRange: [0, 1], outputRange: [theme.color, '#EF4444'] }),
     [flashValue, theme.color],
   );
 
@@ -276,18 +284,13 @@ export default function ReadingScreen() {
                 const isLocateTarget =
                   locateTarget !== null && locateTarget.word === word && locateTarget.paragraphIndex === index;
                 return (
-                  <Animated.View
+                  <Animated.Text
                     key={segmentIndex}
-                    style={{
-                      borderColor: isLocateTarget ? flashBorderColor : 'transparent',
-                      borderRadius: 4,
-                      borderWidth: 1.5,
-                    }}
+                    onPress={() => handleWordPress(word)}
+                    style={{ color: isLocateTarget ? flashTextColor : theme.color }}
                   >
-                    <Pressable onPress={() => handleWordPress(word)}>
-                      <Text style={{ color: theme.color }}>{segment.text}</Text>
-                    </Pressable>
-                  </Animated.View>
+                    {segment.text}
+                  </Animated.Text>
                 );
               })}
             </Text>

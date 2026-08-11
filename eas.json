@@ -6,18 +6,14 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "apk"
-      },
-      "ios": {
-        "simulator": true
+        "buildType": "apk",
+        "architectures": ["arm64-v8a"]
       }
     },
     "production": {
       "android": {
-        "buildType": "app-bundle"
-      },
-      "ios": {
-        "buildType": "archive"
+        "buildType": "app-bundle",
+        "architectures": ["arm64-v8a"]
       }
     }
   }

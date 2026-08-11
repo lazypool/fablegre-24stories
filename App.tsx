@@ -3,12 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookIcon, ExamIcon, GraduationCapIcon, NotebookIcon } from './src/components/TabIcons';
 import StoryDrawer from './src/components/StoryDrawer';
 import ThemeController from './src/components/ThemeController';
 import { preloadAllStories, stories } from './src/data/stories';
 import { PageScrollProvider } from './src/navigation/PageScrollContext';
 import { StoryProvider, useStory } from './src/navigation/StoryContext';
+import { TabBarHeightProvider, useTabBarHeight } from './src/navigation/TabBarHeightContext';
 import { WordProvider } from './src/navigation/WordContext';
 import PlaceholderScreen from './src/pages/PlaceholderScreen';
 import ReadingScreen from './src/pages/ReadingScreen';
@@ -22,13 +24,15 @@ const Tab = createBottomTabNavigator();
 function AppNavigation() {
   const { theme } = useTheme();
   const { selectedStory, selectStory } = useStory();
+  const { tabBarHeight } = useTabBarHeight();
+  const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState('Read');
 
   return (
     <NavigationContainer onStateChange={(state) => setActiveTab(state?.routes[state.index]?.name ?? 'Read')}>
       <StatusBar style="dark" />
-      <ThemeController activeTab={activeTab} />
-      <View className="flex-1">
+      <View style={{ paddingTop: insets.top }} className="flex-1">
+        <ThemeController activeTab={activeTab} />
         <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: theme.color }}>
           <Tab.Screen
             name="Read"
@@ -51,8 +55,8 @@ function AppNavigation() {
             children={() => <PlaceholderScreen title="生词本" description="需要复习的单词将在这里显示。" />}
           />
         </Tab.Navigator>
-        {activeTab !== 'Review' ? (
-          <View style={{ bottom: 48, left: 0, pointerEvents: 'box-none', position: 'absolute', right: 0 }}>
+        {activeTab !== 'Review' && tabBarHeight > 0 ? (
+          <View style={{ bottom: tabBarHeight, left: 0, pointerEvents: 'box-none', position: 'absolute', right: 0 }}>
             <SharedStoryDrawer selectedStoryId={selectedStory.id} onSelect={selectStory} />
           </View>
         ) : null}
@@ -87,14 +91,18 @@ export default function App() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <PageScrollProvider>
-        <StoryProvider>
-          <WordProvider>
-            <AppNavigation />
-          </WordProvider>
-        </StoryProvider>
-      </PageScrollProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <PageScrollProvider>
+          <StoryProvider>
+            <WordProvider>
+              <TabBarHeightProvider>
+                <AppNavigation />
+              </TabBarHeightProvider>
+            </WordProvider>
+          </StoryProvider>
+        </PageScrollProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
