@@ -31,6 +31,12 @@
         }
       ]
     ],
-    "assetBundlePatterns": ["data/**/*"]
+    "assetBundlePatterns": ["data/**/*"],
+    "extra": {
+      "eas": {
+        "projectId": "0d48a26c-f286-404f-b6f5-5a9e6079dd0d"
+      }
+    },
+    "owner": "lazypool"
   }
 }
