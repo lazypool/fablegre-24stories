@@ -27,7 +27,7 @@ function AppNavigation() {
   return (
     <NavigationContainer onStateChange={(state) => setActiveTab(state?.routes[state.index]?.name ?? 'Read')}>
       <StatusBar style="dark" />
-      <ThemeController />
+      <ThemeController activeTab={activeTab} />
       <View className="flex-1">
         <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: theme.color }}>
           <Tab.Screen

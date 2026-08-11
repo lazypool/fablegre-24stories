@@ -5,7 +5,7 @@ import { usePageScroll } from '../navigation/PageScrollContext';
 import { useTheme } from '../theme/ThemeContext';
 import ThemePicker from './ThemePicker';
 
-export default function ThemeController() {
+export default function ThemeController({ activeTab }: { activeTab: string }) {
   const [isOpen, setOpen] = useState(false);
   const { theme, setThemeName } = useTheme();
   const { isScrolled, scrollToTop } = usePageScroll();
@@ -13,6 +13,7 @@ export default function ThemeController() {
   const popoverOpacity = useRef(new Animated.Value(0)).current;
   const buttonOffset = useRef(new Animated.Value(0)).current;
   const [isButtonAnimating, setButtonAnimating] = useState(false);
+  const shouldHide = activeTab === 'Read' && isScrolled;
 
   useEffect(() => {
     Animated.parallel([
@@ -26,26 +27,26 @@ export default function ThemeController() {
   }, [isOpen, popoverOpacity, popoverScale]);
 
   useEffect(() => {
-    if (isScrolled) setOpen(false);
+    if (shouldHide) setOpen(false);
     setButtonAnimating(true);
     Animated.spring(buttonOffset, {
       damping: 14,
       stiffness: 170,
-      toValue: isScrolled ? -28 : 0,
+      toValue: shouldHide ? -28 : 0,
       useNativeDriver: Platform.OS !== 'web',
     }).start(() => setButtonAnimating(false));
-  }, [buttonOffset, isScrolled]);
+  }, [buttonOffset, shouldHide]);
 
   return (
     <Animated.View
       style={{ position: 'absolute', right: 16, top: 14, transform: [{ translateY: buttonOffset }], zIndex: 20 }}
     >
       <Pressable
-        accessibilityLabel={isScrolled ? '回到顶部' : '调整主题'}
+        accessibilityLabel={shouldHide ? '回到顶部' : '调整主题'}
         disabled={isButtonAnimating}
         onPress={() => {
           if (isButtonAnimating) return;
-          if (isScrolled) scrollToTop();
+          if (shouldHide) scrollToTop();
           else setOpen((open) => !open);
         }}
         style={{

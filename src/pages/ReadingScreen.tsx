@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Animated, FlatList, Pressable, Text, View } from 'react-native';
 
 import WordMeaningCard from '../components/WordMeaningCard';
+import { loadReadingProgress, saveReadingProgress } from '../data/readingProgress';
 import { loadStory } from '../data/stories';
 import { usePageScroll } from '../navigation/PageScrollContext';
 import { useStory } from '../navigation/StoryContext';
@@ -47,6 +48,10 @@ export default function ReadingScreen() {
   const contentHeight = useRef(0);
   const maximumOffset = useRef<number | null>(null);
   const isButtonHidden = useRef(false);
+  const pendingRestore = useRef<number | null>(null);
+  const restoreReady = useRef(false);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingSave = useRef<{ storyId: string; progress: number } | null>(null);
   const { setPageScroll } = usePageScroll();
   const { selectedStory } = useStory();
   const { lookupWord, prefetchForParagraph } = useWordBank();
@@ -69,6 +74,33 @@ export default function ReadingScreen() {
   function closeCard() {
     setSelectedRecord(null);
     setLoadingWord(null);
+  }
+
+  function flushProgressSave() {
+    if (saveTimer.current) {
+      clearTimeout(saveTimer.current);
+      saveTimer.current = null;
+    }
+    if (pendingSave.current) {
+      const { storyId, progress } = pendingSave.current;
+      pendingSave.current = null;
+      void saveReadingProgress(storyId, progress).catch(() => {});
+    }
+  }
+
+  function scheduleProgressSave(progress: number) {
+    pendingSave.current = { storyId: selectedStory.id, progress };
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(flushProgressSave, 500);
+  }
+
+  function restoreScrollPosition() {
+    const progress = pendingRestore.current;
+    if (progress == null) return;
+    const max = maximumOffset.current ?? 0;
+    if (max <= 0) return;
+    pendingRestore.current = null;
+    listRef.current?.scrollToOffset({ animated: false, offset: progress * max });
   }
 
   function handleWordPress(word: string) {
@@ -102,6 +134,7 @@ export default function ReadingScreen() {
 
   useEffect(() => {
     let isActive = true;
+    flushProgressSave();
     setStory([]);
     setError(null);
     setReadingProgress(0);
@@ -116,12 +149,13 @@ export default function ReadingScreen() {
     maximumOffset.current = null;
     isButtonHidden.current = false;
     prefetchedParagraph.current = -1;
+    pendingRestore.current = null;
+    restoreReady.current = false;
     void loadStory(selectedStory)
       .then(({ paragraphs }) => {
-        if (isActive) {
-          setStory(paragraphs);
-          setLoading(false);
-        }
+        if (!isActive) return;
+        setStory(paragraphs);
+        setLoading(false);
       })
       .catch(() => {
         if (isActive) {
@@ -129,6 +163,13 @@ export default function ReadingScreen() {
           setLoading(false);
         }
       });
+    void loadReadingProgress(selectedStory.id).then((progress) => {
+      if (!isActive) return;
+      pendingRestore.current = progress;
+      restoreReady.current = true;
+      if (progress > 0) setReadingProgress(progress);
+      if (maximumOffset.current != null) restoreScrollPosition();
+    });
 
     return () => {
       isActive = false;
@@ -138,6 +179,10 @@ export default function ReadingScreen() {
   useEffect(() => {
     return () => setPageScroll(false, () => {});
   }, [setPageScroll]);
+
+  useEffect(() => {
+    return () => flushProgressSave();
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -180,12 +225,14 @@ export default function ReadingScreen() {
           viewportHeight.current = event.nativeEvent.layout.height;
           if (!isLoading && maximumOffset.current === null && contentHeight.current > 0) {
             maximumOffset.current = Math.max(0, contentHeight.current - viewportHeight.current);
+            if (restoreReady.current) restoreScrollPosition();
           }
         }}
         onContentSizeChange={(_, nextContentHeight) => {
           contentHeight.current = nextContentHeight;
           if (!isLoading && maximumOffset.current === null && viewportHeight.current > 0) {
             maximumOffset.current = Math.max(0, nextContentHeight - viewportHeight.current);
+            if (restoreReady.current) restoreScrollPosition();
           }
         }}
         onScroll={(event) => {
@@ -207,6 +254,7 @@ export default function ReadingScreen() {
           const isScrolled = isButtonHidden.current;
 
           setReadingProgress(progress);
+          scheduleProgressSave(progress);
           setPageScroll(isScrolled, () => listRef.current?.scrollToOffset({ animated: true, offset: 0 }));
         }}
         scrollEventThrottle={16}
