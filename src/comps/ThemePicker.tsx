@@ -1,6 +1,6 @@
 import { Pressable, View } from 'react-native';
 
-import { themes, type ThemeName } from '../theme/themes';
+import { themes, type ThemeName } from '../types/theme';
 
 type ThemePickerProps = {
   selectedTheme: ThemeName;

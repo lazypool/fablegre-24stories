@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Animated, LayoutChangeEvent, Pressable, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-import { useTheme } from '../theme/ThemeContext';
+import { useTheme } from '../ctx/ThemeContext';
 import type { Story } from '../types/story';
 
 const HANDLE_HEIGHT = 24;

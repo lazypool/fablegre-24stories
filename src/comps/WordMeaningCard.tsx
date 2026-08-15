@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Modal, Pressable, Text, View } from 'react-native';
 
 import { addWrongWord, loadWrongWords } from '../data/wrongWords';
-import { useTheme } from '../theme/ThemeContext';
+import { useTheme } from '../ctx/ThemeContext';
 import type { WordRecord } from '../types/word';
 
 type WordMeaningCardProps = {

@@ -2,12 +2,12 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Animated, FlatList, Text, View } from 'react-native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
-import WordMeaningCard from '../components/WordMeaningCard';
+import WordMeaningCard from '../comps/WordMeaningCard';
 import { loadStory } from '../data/stories';
-import { useStory } from '../navigation/StoryContext';
-import { useTabBarHeight } from '../navigation/TabBarHeightContext';
-import { useWordBank } from '../navigation/WordContext';
-import { useTheme } from '../theme/ThemeContext';
+import { useStory } from '../ctx/StoryContext';
+import { useTabBarHeight } from '../ctx/TabBarHeightContext';
+import { useWordBank } from '../ctx/WordContext';
+import { useTheme } from '../ctx/ThemeContext';
 import type { EnglishSegment, StoryParagraph } from '../types/story';
 import type { WordRecord } from '../types/word';
 

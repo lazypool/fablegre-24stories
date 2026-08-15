@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Platform, Pressable, View } from 'react-native';
 
-import { useTheme } from '../theme/ThemeContext';
+import { useTheme } from '../ctx/ThemeContext';
 import ThemePicker from './ThemePicker';
 
 const BUTTON_SIZE = 28;

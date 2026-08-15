@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type PropsWithChildren } from 'react';
 
-import { defaultTheme, themes, type Theme, type ThemeName } from './themes';
+import { defaultTheme, themes, type Theme, type ThemeName } from '../types/theme';
 
 type ThemeContextValue = {
   theme: Theme;
