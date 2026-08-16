@@ -1,11 +1,12 @@
 import { createContext, useCallback, useContext, type PropsWithChildren } from 'react';
 
-import { getWordBank } from '../data/words';
+import { getWordBank, getWordsByStory } from '../data/words';
 import { useStory } from './StoryContext';
 import type { WordRecord } from '../types/word';
 
 type WordContextValue = {
   lookupWord: (word: string) => WordRecord | null;
+  getWordRecordsByStory: (storyId: string) => WordRecord[];
 };
 
 const WordContext = createContext<WordContextValue | null>(null);
@@ -15,7 +16,11 @@ export function WordProvider({ children }: PropsWithChildren) {
 
   const lookupWord = useCallback((word: string) => getWordBank(selectedStory.id).get(word) ?? null, [selectedStory]);
 
-  return <WordContext.Provider value={{ lookupWord }}>{children}</WordContext.Provider>;
+  return (
+    <WordContext.Provider value={{ lookupWord, getWordRecordsByStory: getWordsByStory }}>
+      {children}
+    </WordContext.Provider>
+  );
 }
 
 export function useWordBank() {

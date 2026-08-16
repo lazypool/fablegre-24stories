@@ -1,6 +1,16 @@
 import Svg, { Path } from 'react-native-svg';
 
-export function BookIcon({ color }: { color: string }) {
+import { useTheme } from '../ctx/ThemeContext';
+
+type IconProps = { focused: boolean };
+
+function resolveColor(focused: boolean, themeColor: string) {
+  return focused ? themeColor : '#94A3B8';
+}
+
+export function BookIcon({ focused }: IconProps) {
+  const { theme } = useTheme();
+  const color = resolveColor(focused, theme.color);
   return (
     <Svg width={22} height={22} viewBox="0 0 24 24" fill="none">
       <Path
@@ -22,7 +32,9 @@ export function BookIcon({ color }: { color: string }) {
   );
 }
 
-export function GraduationCapIcon({ color }: { color: string }) {
+export function GraduationCapIcon({ focused }: IconProps) {
+  const { theme } = useTheme();
+  const color = resolveColor(focused, theme.color);
   return (
     <Svg width={22} height={22} viewBox="0 0 24 24" fill="none">
       <Path d="m3 9 9-5 9 5-9 5-9-5Z" stroke={color} strokeWidth={1.8} strokeLinejoin="round" />
@@ -31,7 +43,9 @@ export function GraduationCapIcon({ color }: { color: string }) {
   );
 }
 
-export function ExamIcon({ color }: { color: string }) {
+export function ExamIcon({ focused }: IconProps) {
+  const { theme } = useTheme();
+  const color = resolveColor(focused, theme.color);
   return (
     <Svg width={22} height={22} viewBox="0 0 24 24" fill="none">
       <Path d="m14.5 14.5 5 5" stroke={color} strokeWidth={1.8} strokeLinecap="round" />
@@ -40,7 +54,9 @@ export function ExamIcon({ color }: { color: string }) {
   );
 }
 
-export function NotebookIcon({ color }: { color: string }) {
+export function NotebookIcon({ focused }: IconProps) {
+  const { theme } = useTheme();
+  const color = resolveColor(focused, theme.color);
   return (
     <Svg width={22} height={22} viewBox="0 0 24 24" fill="none">
       <Path

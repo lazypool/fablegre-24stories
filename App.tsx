@@ -13,6 +13,7 @@ import { TabBarHeightProvider, useTabBarHeight } from './src/ctx/TabBarHeightCon
 import { WordProvider } from './src/ctx/WordContext';
 import PlaceholderScreen from './src/pages/PlaceholderScreen';
 import ReadingScreen from './src/pages/ReadingScreen';
+import WordsScreen from './src/pages/WordsScreen';
 import { ThemeProvider, useTheme } from './src/ctx/ThemeContext';
 import type { Story } from './src/types/story';
 
@@ -32,25 +33,27 @@ function AppNavigation() {
       <StatusBar style="dark" />
       <View style={{ paddingTop: insets.top }} className="flex-1">
         <ThemeController activeTab={activeTab} selectedStoryId={selectedStory.id} />
-        <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: theme.color }}>
+        <Tab.Navigator
+          screenOptions={{ headerShown: false, tabBarActiveTintColor: theme.color, tabBarInactiveTintColor: '#94A3B8' }}
+        >
           <Tab.Screen
             name="Read"
             component={ReadingScreen}
-            options={{ title: '读小说', tabBarIcon: ({ color }) => <BookIcon color={color} /> }}
+            options={{ title: '读小说', tabBarIcon: ({ focused }) => <BookIcon focused={focused} /> }}
           />
           <Tab.Screen
             name="Words"
-            options={{ title: '记单词', tabBarIcon: ({ color }) => <GraduationCapIcon color={color} /> }}
-            children={() => <PlaceholderScreen title="记单词" description="词条浏览将在这里开始。" />}
+            component={WordsScreen}
+            options={{ title: '记单词', tabBarIcon: ({ focused }) => <GraduationCapIcon focused={focused} /> }}
           />
           <Tab.Screen
             name="Quiz"
-            options={{ title: '做测试', tabBarIcon: ({ color }) => <ExamIcon color={color} /> }}
+            options={{ title: '做测试', tabBarIcon: ({ focused }) => <ExamIcon focused={focused} /> }}
             children={() => <PlaceholderScreen title="做测试" description="选择题练习将在这里开始。" />}
           />
           <Tab.Screen
             name="Review"
-            options={{ title: '生词本', tabBarIcon: ({ color }) => <NotebookIcon color={color} /> }}
+            options={{ title: '生词本', tabBarIcon: ({ focused }) => <NotebookIcon focused={focused} /> }}
             children={() => <PlaceholderScreen title="生词本" description="需要复习的单词将在这里显示。" />}
           />
         </Tab.Navigator>

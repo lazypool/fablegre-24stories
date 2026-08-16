@@ -1,8 +1,9 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, FlatList, Text, View } from 'react-native';
+import { ActivityIndicator, Animated, FlatList, Modal, Pressable, Text, View } from 'react-native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useNavigation, useRoute, type RouteProp } from '@react-navigation/native';
 
-import WordMeaningCard from '../comps/WordMeaningCard';
+import WordCard from '../comps/WordCard';
 import { loadStory } from '../data/stories';
 import { useStory } from '../ctx/StoryContext';
 import { useTabBarHeight } from '../ctx/TabBarHeightContext';
@@ -35,6 +36,7 @@ const ParagraphItem = memo(function ParagraphItem({
   return (
     <View
       className="mb-4 rounded-lg border border-slate-200 bg-white p-5"
+      nativeID={`paragraph-${paragraphIndex}`}
       onLayout={(e) => onHeightChange(paragraphIndex, e.nativeEvent.layout.height)}
     >
       <Text className="text-lg leading-[30px] text-slate-800">
@@ -77,6 +79,8 @@ export default function ReadingScreen() {
   const maximumOffset = useRef<number | null>(null);
   const { selectedStory } = useStory();
   const { lookupWord } = useWordBank();
+  const navigation = useNavigation();
+  const route = useRoute<RouteProp<Record<string, { targetParagraph?: number; targetWord?: string }>>>();
   const { theme } = useTheme();
   const { setTabBarHeight } = useTabBarHeight();
   const [selectedRecord, setSelectedRecord] = useState<WordRecord | null>(null);
@@ -114,18 +118,49 @@ export default function ReadingScreen() {
     [flashValue, theme.color],
   );
 
-  function flashWord(word: string, paragraphIndex: number) {
-    setLocateTarget({ word, paragraphIndex });
-    flashValue.stopAnimation();
-    flashValue.setValue(0);
-    const pulses = Animated.sequence([
-      Animated.timing(flashValue, { duration: 160, toValue: 1, useNativeDriver: false }),
-      Animated.timing(flashValue, { duration: 160, toValue: 0, useNativeDriver: false }),
-    ]);
-    pulses.start(({ finished }) => {
-      if (finished) setLocateTarget(null);
-    });
-  }
+  const scrollToParagraphByOffset = useCallback((index: number) => {
+    let offset = 0;
+    for (let i = 0; i < index; i++) {
+      offset += paragraphHeights.current.get(i) ?? 200;
+    }
+    const headerHeight = 80;
+    offset += headerHeight;
+    offset = Math.max(0, offset - viewportHeight.current * 0.2);
+    listRef.current?.scrollToOffset({ animated: true, offset });
+  }, []);
+
+  const scrollToParagraph = useCallback(
+    (index: number) => {
+      scrollToParagraphByOffset(index);
+    },
+    [scrollToParagraphByOffset],
+  );
+
+  const handleScrollToIndexFailed = useCallback(
+    (info: { index: number; highestMeasuredFrameIndex: number; averageItemLength: number }) => {
+      const offset = info.index * info.averageItemLength;
+      listRef.current?.scrollToOffset({ animated: true, offset: Math.max(0, offset - 50) });
+    },
+    [],
+  );
+
+  const flashWord = useCallback(
+    (word: string, paragraphIndex: number) => {
+      setLocateTarget({ word, paragraphIndex });
+      flashValue.stopAnimation();
+      flashValue.setValue(0);
+      const pulses = Animated.sequence([
+        Animated.timing(flashValue, { duration: 160, toValue: 1, useNativeDriver: false }),
+        Animated.timing(flashValue, { duration: 160, toValue: 0, useNativeDriver: false }),
+        Animated.timing(flashValue, { duration: 160, toValue: 1, useNativeDriver: false }),
+        Animated.timing(flashValue, { duration: 160, toValue: 0, useNativeDriver: false }),
+      ]);
+      pulses.start(({ finished }) => {
+        if (finished) setLocateTarget(null);
+      });
+    },
+    [flashValue],
+  );
 
   const handleParagraphHeight = useCallback(
     (index: number, height: number) => {
@@ -194,6 +229,20 @@ export default function ReadingScreen() {
     };
   }, [flashValue]);
 
+  useEffect(() => {
+    const target = route.params?.targetParagraph;
+    const word = route.params?.targetWord;
+    if (target === undefined || story.length === 0 || isLoading) return;
+    if (target >= 0 && target < story.length) {
+      navigation.setParams({ targetParagraph: undefined, targetWord: undefined } as never);
+      scrollToParagraph(target);
+      if (word) {
+        if (flashTimer.current) clearTimeout(flashTimer.current);
+        flashTimer.current = setTimeout(() => flashWord(word, target), 100);
+      }
+    }
+  }, [route.params, story, isLoading, navigation, flashWord, scrollToParagraph]);
+
   return (
     <View className="flex-1 bg-slate-50">
       <View style={{ backgroundColor: 'transparent', height: 3, width: '100%' }}>
@@ -211,8 +260,8 @@ export default function ReadingScreen() {
         ref={listRef}
         style={{ flex: 1 }}
         data={story}
-        removeClippedSubviews
         keyExtractor={(_, index) => String(index)}
+        onScrollToIndexFailed={handleScrollToIndexFailed}
         ListEmptyComponent={
           error ? <Text className="text-[15px] text-red-700">{error}</Text> : <ActivityIndicator color={theme.color} />
         }
@@ -248,22 +297,30 @@ export default function ReadingScreen() {
           />
         )}
       />
-      <WordMeaningCard
-        record={selectedRecord}
-        word={loadingWord}
-        onLocate={() => {
-          if (!selectedRecord) return;
-          const paragraphIndex = selectedRecord.paragraph - 1;
-          const word = selectedRecord.word;
-          closeCard();
-          if (paragraphIndex >= 0 && paragraphIndex < story.length) {
-            listRef.current?.scrollToIndex({ animated: true, index: paragraphIndex, viewPosition: 0.2 });
-            if (flashTimer.current) clearTimeout(flashTimer.current);
-            flashTimer.current = setTimeout(() => flashWord(word, paragraphIndex), 500);
-          }
-        }}
+      <Modal
+        animationType="fade"
+        transparent
+        visible={selectedRecord !== null || loadingWord !== null}
         onRequestClose={closeCard}
-      />
+      >
+        <Pressable className="flex-1 items-center justify-center bg-black/40 px-6 py-24" onPress={closeCard}>
+          <Pressable className="w-full max-w-md" accessible={false} onPress={() => {}}>
+            <WordCard
+              record={selectedRecord}
+              word={loadingWord}
+              buttons={[
+                {
+                  label: '看单词卡',
+                  onPress: () => {
+                    closeCard();
+                    (navigation as any).navigate('Words', { targetWord: selectedRecord?.word });
+                  },
+                },
+              ]}
+            />
+          </Pressable>
+        </Pressable>
+      </Modal>
     </View>
   );
 }
