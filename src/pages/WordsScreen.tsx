@@ -8,29 +8,39 @@ import { useTheme } from '../ctx/ThemeContext';
 import { useWordBank } from '../ctx/WordContext';
 import { useStory } from '../ctx/StoryContext';
 
-const SWIPE_THRESHOLD = 60;
-const EXIT_DURATION = 200;
+const VERTICAL_SWIPE_THRESHOLD = 20;
+const VERTICAL_EXIT_DURATION = 360;
+const HORIZONTAL_SWIPE_THRESHOLD = 60;
+const HORIZONTAL_EXIT_DURATION = 120;
 
 export default function WordsScreen() {
   const { theme } = useTheme();
   const { getWordRecordsByStory } = useWordBank();
   const { selectedStory } = useStory();
   const tabBarHeight = useBottomTabBarHeight();
-  const { width: screenWidth } = useWindowDimensions();
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const route = useRoute<RouteProp<Record<string, { targetWord?: string }>>>();
   const navigation = useNavigation();
   const exitDistance = screenWidth + 100;
 
   const [cardHeight, setCardHeight] = useState(0);
+  const cardHeightRef = useRef(0);
   const words = getWordRecordsByStory(selectedStory.id);
   const n = words.length;
 
   const [frontWord, setFrontWord] = useState(0);
   const [backWord, setBackWord] = useState(1);
+  const frontWordRef = useRef(0);
   const backWordRef = useRef(1);
   const nRef = useRef(n);
   const exitDistRef = useRef(exitDistance);
 
+  useEffect(() => {
+    cardHeightRef.current = cardHeight;
+  }, [cardHeight]);
+  useEffect(() => {
+    frontWordRef.current = frontWord;
+  }, [frontWord]);
   useEffect(() => {
     backWordRef.current = backWord;
   }, [backWord]);
@@ -42,13 +52,20 @@ export default function WordsScreen() {
   }, [exitDistance]);
 
   const frontX = useRef(new Animated.Value(0)).current;
+  const frontY = useRef(new Animated.Value(0)).current;
+  const rotate = frontX.interpolate({
+    inputRange: [-screenWidth, 0, screenWidth],
+    outputRange: ['-15deg', '0deg', '15deg'],
+    extrapolate: 'clamp',
+  });
   const isAnimating = useRef(false);
 
   useEffect(() => {
     setFrontWord(0);
     setBackWord(1);
     frontX.setValue(0);
-  }, [selectedStory, frontX]);
+    frontY.setValue(0);
+  }, [selectedStory, frontX, frontY]);
 
   useEffect(() => {
     const target = route.params?.targetWord;
@@ -58,16 +75,12 @@ export default function WordsScreen() {
     setFrontWord(idx);
     setBackWord((idx + 1) % n);
     frontX.setValue(0);
-  }, [route.params?.targetWord, words, n, frontX]);
+    frontY.setValue(0);
+  }, [route.params?.targetWord, words, n, frontX, frontY]);
 
-  function advanceToNext() {
-    if (isAnimating.current || n < 2) return;
-    const bw = backWordRef.current;
-    const nn = nRef.current;
-    setFrontWord(bw);
-    setBackWord((bw + 1) % nn);
-    frontX.setValue(0);
-  }
+  const gestureStartRef = useRef({ x: 0, y: 0 });
+  const prevGestureX = useRef(0);
+  const totalHorizontalDistance = useRef(0);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -77,18 +90,56 @@ export default function WordsScreen() {
         const adx = Math.abs(g.dx);
         const ady = Math.abs(g.dy);
         if (adx < 10 && ady < 10) return false;
-        return adx >= ady;
+        return true;
+      },
+      onPanResponderGrant: (_, g) => {
+        gestureStartRef.current = { x: g.x0, y: g.y0 };
+        prevGestureX.current = g.x0;
+        totalHorizontalDistance.current = 0;
       },
       onPanResponderMove: (_, g) => {
-        frontX.setValue(g.dx);
+        const x = gestureStartRef.current.x + g.dx;
+        totalHorizontalDistance.current += Math.abs(x - prevGestureX.current);
+        prevGestureX.current = x;
+        if (totalHorizontalDistance.current >= 2 * VERTICAL_SWIPE_THRESHOLD) {
+          frontX.setValue(g.dx);
+        }
       },
       onPanResponderRelease: (_, g) => {
-        if (Math.abs(g.dx) > SWIPE_THRESHOLD) {
+        const adx = Math.abs(g.dx);
+        const ady = Math.abs(g.dy);
+
+        const isStraightVertical =
+          ady > VERTICAL_SWIPE_THRESHOLD && totalHorizontalDistance.current < 2 * VERTICAL_SWIPE_THRESHOLD;
+
+        if (isStraightVertical) {
+          isAnimating.current = true;
+          const fw = frontWordRef.current;
+          const nn = nRef.current;
+          const prevWord = (fw - 1 + nn) % nn;
+          setBackWord(fw);
+          setTimeout(() => {
+            frontY.setValue(screenHeight + cardHeightRef.current);
+            setTimeout(() => {
+              setFrontWord(prevWord);
+              setTimeout(() => {
+                Animated.timing(frontY, {
+                  toValue: 0,
+                  duration: VERTICAL_EXIT_DURATION,
+                  useNativeDriver: false,
+                }).start(() => {
+                  frontY.setValue(0);
+                  isAnimating.current = false;
+                });
+              }, 0);
+            }, 0);
+          }, 0);
+        } else if (adx > HORIZONTAL_SWIPE_THRESHOLD) {
           isAnimating.current = true;
           const dir = g.dx > 0 ? 1 : -1;
           Animated.timing(frontX, {
             toValue: dir * exitDistRef.current,
-            duration: EXIT_DURATION,
+            duration: HORIZONTAL_EXIT_DURATION,
             useNativeDriver: false,
           }).start(() => {
             const bw = backWordRef.current;
@@ -101,7 +152,10 @@ export default function WordsScreen() {
             }, 0);
           });
         } else {
-          Animated.spring(frontX, { toValue: 0, useNativeDriver: false }).start();
+          Animated.parallel([
+            Animated.spring(frontX, { toValue: 0, useNativeDriver: false }),
+            Animated.spring(frontY, { toValue: 0, useNativeDriver: false }),
+          ]).start();
         }
       },
     }),
@@ -139,7 +193,15 @@ export default function WordsScreen() {
             <>
               <View style={{ position: 'absolute', left: 0, right: 0, top: 0, zIndex: 0 }}>
                 <View style={containerStyle}>
-                  <WordCard record={words[backWord]} />
+                  <WordCard
+                    record={words[backWord]}
+                    buttons={[
+                      {
+                        label: '定位原文',
+                        onPress: () => {},
+                      },
+                    ]}
+                  />
                 </View>
               </View>
 
@@ -150,7 +212,7 @@ export default function WordsScreen() {
                   right: 0,
                   top: 0,
                   zIndex: 1,
-                  transform: [{ translateX: frontX }],
+                  transform: [{ translateX: frontX }, { translateY: frontY }, { rotate }],
                 }}
                 {...panResponder.panHandlers}
               >
@@ -176,9 +238,7 @@ export default function WordsScreen() {
           )}
         </View>
 
-        <Text className="mt-6 text-xs text-slate-400" onPress={advanceToNext}>
-          ← 左右滑动下一张 · 点击这里翻看 →
-        </Text>
+        <Text className="mt-6 text-xs text-slate-400">← 左右滑动下一张 · 向上滑动上一张 →</Text>
       </View>
     </View>
   );
