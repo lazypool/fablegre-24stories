@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Platform, Pressable, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '../ctx/ThemeContext';
 import ThemePicker from './ThemePicker';
@@ -13,6 +14,7 @@ export default function ThemeController({
   activeTab: string;
   selectedStoryId: string;
 }) {
+  const insets = useSafeAreaInsets();
   const [isOpen, setOpen] = useState(false);
   const { theme, setThemeName } = useTheme();
   const popoverScale = useRef(new Animated.Value(0.8)).current;
@@ -34,7 +36,7 @@ export default function ThemeController({
   }, [isOpen, popoverOpacity, popoverScale]);
 
   return (
-    <View style={{ position: 'absolute', right: 16, top: 14, zIndex: 20 }}>
+    <View style={{ position: 'absolute', right: 16, top: insets.top + 14, zIndex: 20 }}>
       <Pressable
         accessibilityLabel="调整主题"
         onPress={() => setOpen((open) => !open)}

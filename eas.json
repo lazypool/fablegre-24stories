@@ -6,14 +6,7 @@
   "build": {
     "preview": {
       "android": {
-        "buildType": "apk",
-        "splitPerAbi": true
-      }
-    },
-    "production": {
-      "android": {
-        "buildType": "app-bundle",
-        "splitPerAbi": true
+        "buildType": "apk"
       }
     }
   }

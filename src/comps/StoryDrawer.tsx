@@ -16,27 +16,29 @@ type StoryDrawerProps = {
 };
 
 export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect, onToggle }: StoryDrawerProps) {
-  const height = useRef(new Animated.Value(HANDLE_HEIGHT)).current;
   const [contentHeight, setContentHeight] = useState(0);
+  const translateY = useRef(new Animated.Value(0)).current;
   const [isMounted, setMounted] = useState(isOpen);
   const { theme } = useTheme();
 
   useEffect(() => {
     if (isOpen) setMounted(true);
 
-    const animation = Animated.timing(height, {
-      toValue: isOpen ? HANDLE_HEIGHT + contentHeight : HANDLE_HEIGHT,
+    const animation = Animated.timing(translateY, {
+      toValue: isOpen ? 0 : contentHeight,
       duration: 220,
-      useNativeDriver: false,
+      useNativeDriver: true,
     });
 
     animation.start(({ finished }) => {
       if (finished && !isOpen) setMounted(false);
     });
-  }, [contentHeight, height, isOpen]);
+  }, [contentHeight, translateY, isOpen]);
 
   function handleContentLayout(event: LayoutChangeEvent) {
-    setContentHeight(event.nativeEvent.layout.height);
+    const h = event.nativeEvent.layout.height;
+    if (!isOpen) translateY.setValue(h);
+    setContentHeight(h);
   }
 
   function DrawerHandle({ expanded }: { expanded: boolean }) {
@@ -76,34 +78,41 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
   }
 
   return (
-    <Animated.View
-      className="rounded-t-[24px] bg-slate-50"
-      style={{ backgroundColor: '#F8FAFC', borderTopColor: '#CBD5E1', borderTopWidth: 1, height, overflow: 'hidden' }}
-    >
-      <DrawerHandle expanded={isOpen} />
-      <View onLayout={handleContentLayout} style={{ paddingBottom: 12, paddingHorizontal: 24 }}>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-          {stories.map((story, index) => (
-            <View key={story.id} style={{ aspectRatio: 1, overflow: 'hidden', padding: 5, width: '12.5%' }}>
-              <Pressable
-                className="flex-1 items-center justify-center rounded-xl"
-                style={{
-                  alignItems: 'center',
-                  backgroundColor: story.id === selectedStoryId ? theme.color : '#E2E8F0',
-                  borderRadius: 12,
-                  borderWidth: 0,
-                  justifyContent: 'center',
-                }}
-                onPress={() => onSelect(story)}
-              >
-                <Text className="text-sm font-bold" style={{ color: '#FFFFFF' }}>
-                  {String(index + 1).padStart(2, '0')}
-                </Text>
-              </Pressable>
-            </View>
-          ))}
+    <View style={{ overflow: 'hidden' }}>
+      <Animated.View
+        className="rounded-t-[24px] bg-slate-50"
+        style={{
+          backgroundColor: '#F8FAFC',
+          borderTopColor: '#CBD5E1',
+          borderTopWidth: 1,
+          transform: [{ translateY }],
+        }}
+      >
+        <DrawerHandle expanded={isOpen} />
+        <View onLayout={handleContentLayout} style={{ paddingBottom: 12, paddingHorizontal: 24 }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {stories.map((story, index) => (
+              <View key={story.id} style={{ aspectRatio: 1, overflow: 'hidden', padding: 5, width: '12.5%' }}>
+                <Pressable
+                  className="flex-1 items-center justify-center rounded-xl"
+                  style={{
+                    alignItems: 'center',
+                    backgroundColor: story.id === selectedStoryId ? theme.color : '#E2E8F0',
+                    borderRadius: 12,
+                    borderWidth: 0,
+                    justifyContent: 'center',
+                  }}
+                  onPress={() => onSelect(story)}
+                >
+                  <Text className="text-sm font-bold" style={{ color: '#FFFFFF' }}>
+                    {String(index + 1).padStart(2, '0')}
+                  </Text>
+                </Pressable>
+              </View>
+            ))}
+          </View>
         </View>
-      </View>
-    </Animated.View>
+      </Animated.View>
+    </View>
   );
 }
