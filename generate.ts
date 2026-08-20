@@ -9,7 +9,6 @@ type EnglishSegment = { text: string; word: string | null; isItalic: boolean };
 type StoryParagraph = { english: string; chinese: string; segments: EnglishSegment[] };
 type WordRecord = {
   word: string;
-  meaning: string;
   synonyms: string[];
   chineseMeaning: string;
   englishMeaning: string;
@@ -17,17 +16,15 @@ type WordRecord = {
   paragraph: number;
 };
 
-// ── Parse stories ──
-
 function splitEnglish(english: string): EnglishSegment[] {
   return english
-    .split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g)
+    .split(/(\*\*[^*]+\*\*[A-Za-z]*|\*[^*]+\*)/g)
     .filter(Boolean)
     .map((part) => {
-      const bold = part.match(/^\*\*([^*]+)\*\*$/);
+      const bold = part.match(/^\*\*([^*]+)\*\*([A-Za-z]*)$/);
       if (bold) {
         const word = bold[1].trim();
-        return { text: word, word, isItalic: false };
+        return { text: `${word}${bold[2]}`, word, isItalic: false };
       }
       const italic = part.match(/^\*([^*]+)\*$/);
       return italic
@@ -39,9 +36,9 @@ function splitEnglish(english: string): EnglishSegment[] {
 function parseStory(source: string): { paragraphs: StoryParagraph[] } {
   const blocks = source
     .split(/\r?\n\s*\r?\n/)
-    .map((b) => b.trim())
+    .map((block) => block.trim())
     .filter(Boolean)
-    .filter((b) => !b.startsWith('#'));
+    .filter((block) => !block.startsWith('#'));
   const paragraphs: StoryParagraph[] = [];
   for (let i = 0; i + 1 < blocks.length; i += 2) {
     const english = blocks[i];
@@ -50,41 +47,44 @@ function parseStory(source: string): { paragraphs: StoryParagraph[] } {
   return { paragraphs };
 }
 
-const storyFiles = readdirSync(STORIES_DIR).filter((f) => f.endsWith('.md'));
+const storyFiles = readdirSync(STORIES_DIR)
+  .filter((file) => /^story_\d+\.md$/.test(file))
+  .sort();
 const allStories: Record<string, { paragraphs: StoryParagraph[] }> = {};
+const allWords: Record<string, Record<string, WordRecord>> = {};
 
-for (const file of storyFiles) {
-  const storyId = file.replace('.md', '');
-  const source = readFileSync(join(STORIES_DIR, file), 'utf8');
-  allStories[storyId] = parseStory(source);
-  console.log(`  story: ${storyId} (${allStories[storyId].paragraphs.length} paragraphs)`);
+for (const storyFile of storyFiles) {
+  const storyId = storyFile.replace('.md', '');
+  const chunkId = storyId.replace('story_', 'chunk_');
+  const { paragraphs } = parseStory(readFileSync(join(STORIES_DIR, storyFile), 'utf8'));
+  const records = JSON.parse(readFileSync(join(WORDS_DIR, `${chunkId}.words`), 'utf8')) as WordRecord[];
+  const wordMap = Object.fromEntries(
+    records.map((record) => [
+      record.word,
+      { ...record, chineseMeaning: record.chineseMeaning.replace(/\\n/g, '\n'), paragraph: 0 },
+    ]),
+  ) as Record<string, WordRecord>;
+
+  paragraphs.forEach((paragraph, paragraphIndex) => {
+    for (const segment of paragraph.segments) {
+      if (!segment.word) continue;
+      if (!wordMap[segment.word]) {
+        throw new Error(`${storyId}: highlighted word "${segment.word}" has no word record`);
+      }
+      if (wordMap[segment.word].paragraph === 0) wordMap[segment.word].paragraph = paragraphIndex + 1;
+    }
+  });
+
+  for (const word of Object.keys(wordMap)) {
+    if (wordMap[word].paragraph === 0)
+      throw new Error(`${storyId}: word record "${word}" is not highlighted in the story`);
+  }
+
+  allStories[storyId] = { paragraphs };
+  allWords[storyId] = wordMap;
+  console.log(`  ${storyId}: ${paragraphs.length} paragraphs, ${records.length} words`);
 }
 
 writeFileSync(join(OUT_DIR, 'all-stories.json'), JSON.stringify(allStories));
-console.log(`✓ all-stories.json (${storyFiles.length} stories)`);
-
-// ── Parse words ──
-
-const chunkDirs = readdirSync(WORDS_DIR).filter((d) => d.startsWith('chunk_'));
-const allWords: Record<string, Record<string, WordRecord>> = {};
-
-for (const chunkDir of chunkDirs) {
-  const storyId = `story_${chunkDir.slice(-3)}`;
-  const partFiles = readdirSync(join(WORDS_DIR, chunkDir))
-    .filter((f) => f.endsWith('.words'))
-    .sort();
-  const wordMap: Record<string, WordRecord> = {};
-
-  for (const partFile of partFiles) {
-    const records = JSON.parse(readFileSync(join(WORDS_DIR, chunkDir, partFile), 'utf8')) as WordRecord[];
-    for (const record of records) {
-      wordMap[record.word] = { ...record, chineseMeaning: record.chineseMeaning.replace(/\\n/g, '\n') };
-    }
-  }
-
-  allWords[storyId] = wordMap;
-  console.log(`  words: ${storyId} (${Object.keys(wordMap).length} words)`);
-}
-
 writeFileSync(join(OUT_DIR, 'all-words.json'), JSON.stringify(allWords));
-console.log(`✓ all-words.json (${chunkDirs.length} chunks)`);
+console.log(`Generated ${storyFiles.length} stories and ${Object.keys(allWords).length} word banks`);
