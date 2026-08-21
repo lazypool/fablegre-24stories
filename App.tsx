@@ -12,6 +12,7 @@ import { StoryProvider, useStory } from './src/ctx/StoryContext';
 import { TabBarHeightProvider, useTabBarHeight } from './src/ctx/TabBarHeightContext';
 import { WordProvider } from './src/ctx/WordContext';
 import PlaceholderScreen from './src/pages/PlaceholderScreen';
+import QuizScreen from './src/pages/QuizScreen';
 import ReadingScreen from './src/pages/ReadingScreen';
 import WordsScreen from './src/pages/WordsScreen';
 import { ThemeProvider, useTheme } from './src/ctx/ThemeContext';
@@ -57,8 +58,8 @@ function AppNavigation() {
           />
           <Tab.Screen
             name="Quiz"
+            component={QuizScreen}
             options={{ title: '做测试', tabBarIcon: ({ focused }) => <ExamIcon focused={focused} /> }}
-            children={() => <PlaceholderScreen title="做测试" description="选择题练习将在这里开始。" />}
           />
           <Tab.Screen
             name="Review"
