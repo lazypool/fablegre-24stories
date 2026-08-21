@@ -4,7 +4,8 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useNavigation, useRoute, type RouteProp } from '@react-navigation/native';
 
 import WordCard from '../comps/WordCard';
-import { loadStory } from '../data/stories';
+import { loadStory, stories } from '../data/stories';
+import { useStoryTransition } from '../hooks/useStoryTransition';
 import { useStory } from '../ctx/StoryContext';
 import { useTabBarHeight } from '../ctx/TabBarHeightContext';
 import { useWordBank } from '../ctx/WordContext';
@@ -78,6 +79,8 @@ export default function ReadingScreen() {
   const viewportHeight = useRef(0);
   const maximumOffset = useRef<number | null>(null);
   const { selectedStory } = useStory();
+  const { displayedStoryId, translateX } = useStoryTransition(selectedStory.id);
+  const displayedStory = stories.find((item) => item.id === displayedStoryId) ?? selectedStory;
   const { lookupWord } = useWordBank();
   const navigation = useNavigation();
   const route = useRoute<RouteProp<Record<string, { targetParagraph?: number; targetWord?: string }>>>();
@@ -123,8 +126,6 @@ export default function ReadingScreen() {
     for (let i = 0; i < index; i++) {
       offset += paragraphHeights.current.get(i) ?? 200;
     }
-    const headerHeight = 80;
-    offset += headerHeight;
     offset = Math.max(0, offset - viewportHeight.current * 0.2);
     listRef.current?.scrollToOffset({ animated: true, offset });
   }, []);
@@ -203,7 +204,7 @@ export default function ReadingScreen() {
 
     const timer = setTimeout(() => {
       try {
-        const { paragraphs } = loadStory(selectedStory);
+        const { paragraphs } = loadStory(displayedStory);
         if (!isActive) return;
         setStory(paragraphs);
         setError(null);
@@ -220,7 +221,7 @@ export default function ReadingScreen() {
       isActive = false;
       clearTimeout(timer);
     };
-  }, [flashValue, selectedStory]);
+  }, [displayedStory, flashValue]);
 
   useEffect(() => {
     return () => {
@@ -244,8 +245,8 @@ export default function ReadingScreen() {
   }, [route.params, story, isLoading, navigation, flashWord, scrollToParagraph]);
 
   return (
-    <View className="flex-1 bg-slate-50">
-      <View style={{ backgroundColor: 'transparent', height: 3, width: '100%' }}>
+    <Animated.View className="flex-1 bg-slate-50" style={{ flex: 1, transform: [{ translateX }] }}>
+      <View style={{ backgroundColor: 'transparent', height: 3, position: 'absolute', top: 0, width: '100%' }}>
         <View
           style={{
             backgroundColor: theme.color,
@@ -256,6 +257,9 @@ export default function ReadingScreen() {
           }}
         />
       </View>
+      <View className="px-6 pt-6 pb-2">
+        <Text className="text-3xl font-bold tracking-normal text-slate-900">{displayedStory.title}</Text>
+      </View>
       <FlatList
         ref={listRef}
         style={{ flex: 1 }}
@@ -265,11 +269,8 @@ export default function ReadingScreen() {
         ListEmptyComponent={
           error ? <Text className="text-[15px] text-red-700">{error}</Text> : <ActivityIndicator color={theme.color} />
         }
-        ListHeaderComponent={
-          <Text className="mb-7 text-3xl font-bold tracking-normal text-slate-900">{selectedStory.title}</Text>
-        }
         ListFooterComponent={spacerHeight > 0 ? <View style={{ height: spacerHeight }} /> : null}
-        contentContainerStyle={{ padding: 24 }}
+        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 24, paddingTop: 16 }}
         scrollEnabled={!isLoading}
         showsVerticalScrollIndicator={false}
         onLayout={(event) => {
@@ -321,6 +322,6 @@ export default function ReadingScreen() {
           </Pressable>
         </Pressable>
       </Modal>
-    </View>
+    </Animated.View>
   );
 }

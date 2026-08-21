@@ -7,6 +7,8 @@ import WordCard from '../comps/WordCard';
 import { useTheme } from '../ctx/ThemeContext';
 import { useWordBank } from '../ctx/WordContext';
 import { useStory } from '../ctx/StoryContext';
+import { stories } from '../data/stories';
+import { useStoryTransition } from '../hooks/useStoryTransition';
 
 const VERTICAL_SWIPE_THRESHOLD = 20;
 const VERTICAL_EXIT_DURATION = 360;
@@ -17,6 +19,8 @@ export default function WordsScreen() {
   const { theme } = useTheme();
   const { getWordRecordsByStory } = useWordBank();
   const { selectedStory } = useStory();
+  const { displayedStoryId, translateX } = useStoryTransition(selectedStory.id);
+  const displayedStory = stories.find((item) => item.id === displayedStoryId) ?? selectedStory;
   const tabBarHeight = useBottomTabBarHeight();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const route = useRoute<RouteProp<Record<string, { targetWord?: string }>>>();
@@ -25,7 +29,7 @@ export default function WordsScreen() {
 
   const [cardHeight, setCardHeight] = useState(0);
   const cardHeightRef = useRef(0);
-  const words = getWordRecordsByStory(selectedStory.id);
+  const words = getWordRecordsByStory(displayedStory.id);
   const n = words.length;
 
   const [frontWord, setFrontWord] = useState(0);
@@ -65,7 +69,7 @@ export default function WordsScreen() {
     setBackWord(1);
     frontX.setValue(0);
     frontY.setValue(0);
-  }, [selectedStory, frontX, frontY]);
+  }, [displayedStory, frontX, frontY]);
 
   useEffect(() => {
     const target = route.params?.targetWord;
@@ -165,16 +169,16 @@ export default function WordsScreen() {
     height: cardHeight,
     borderRadius: 20,
     borderWidth: 4,
-    borderColor: '#f8fafc',
+    borderColor: '#F2F2F2',
     backgroundColor: theme.color,
     overflow: 'hidden' as const,
     padding: 4,
   };
 
   return (
-    <View className="flex-1 bg-slate-50">
+    <Animated.View className="flex-1 bg-slate-50" style={{ flex: 1, transform: [{ translateX }] }}>
       <View className="px-6 pt-6 pb-2">
-        <Text className="text-2xl font-bold text-slate-900">{selectedStory.title}</Text>
+        <Text className="text-3xl font-bold tracking-normal text-slate-900">{displayedStory.title}</Text>
         <Text className="mt-2 text-sm text-slate-500">{n > 0 ? `${frontWord + 1} / ${n}` : '暂无单词'}</Text>
       </View>
 
@@ -240,6 +244,6 @@ export default function WordsScreen() {
 
         <Text className="mt-6 text-xs text-slate-400">← 左右滑动下一张 · 向上滑动上一张 →</Text>
       </View>
-    </View>
+    </Animated.View>
   );
 }

@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Easing, View } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookIcon, ExamIcon, GraduationCapIcon, NotebookIcon } from './src/comps/TabIcons';
 import StoryDrawer from './src/comps/StoryDrawer';
@@ -34,7 +34,16 @@ function AppNavigation() {
       <View style={{ paddingTop: insets.top }} className="flex-1">
         <ThemeController activeTab={activeTab} selectedStoryId={selectedStory.id} />
         <Tab.Navigator
-          screenOptions={{ headerShown: false, tabBarActiveTintColor: theme.color, tabBarInactiveTintColor: '#94A3B8' }}
+          screenOptions={{
+            animation: 'shift',
+            headerShown: false,
+            tabBarActiveTintColor: theme.color,
+            tabBarInactiveTintColor: '#94A3B8',
+            transitionSpec: {
+              animation: 'timing',
+              config: { duration: 180, easing: Easing.inOut(Easing.ease) },
+            },
+          }}
         >
           <Tab.Screen
             name="Read"
