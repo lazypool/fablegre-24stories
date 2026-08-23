@@ -6,6 +6,9 @@ import { useTheme } from '../ctx/ThemeContext';
 import type { Story } from '../types/story';
 
 const HANDLE_HEIGHT = 24;
+const HANDLE_WIDTH = 54;
+const DRAWER_COLOR = '#F8FAFC';
+const DRAWER_BORDER_COLOR = '#CBD5E1';
 
 type StoryDrawerProps = {
   isOpen: boolean;
@@ -37,7 +40,7 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
 
   function handleContentLayout(event: LayoutChangeEvent) {
     const h = event.nativeEvent.layout.height;
-    if (!isOpen) translateY.setValue(h);
+    if (!isOpen || contentHeight === 0) translateY.setValue(h);
     setContentHeight(h);
   }
 
@@ -50,12 +53,12 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
           alignSelf: 'center',
           height: HANDLE_HEIGHT,
           justifyContent: 'center',
-          width: 54,
+          width: HANDLE_WIDTH,
         }}
         onPress={onToggle}
       >
-        <Svg height={HANDLE_HEIGHT} style={{ position: 'absolute' }} viewBox="0 0 54 24" width={54}>
-          {!expanded ? <Path d="M9 0h36l9 24H0Z" fill="#F8FAFC" stroke="#CBD5E1" strokeWidth={1} /> : null}
+        <Svg height={HANDLE_HEIGHT} style={{ position: 'absolute' }} viewBox="0 0 54 24" width={HANDLE_WIDTH}>
+          <Path d="M0 24 9 0h36l9 24" fill={DRAWER_COLOR} stroke={DRAWER_BORDER_COLOR} strokeWidth={1} />
           <Path
             d={expanded ? 'm21 9 6 7 6-7' : 'm21 15 6-7 6 7'}
             fill="none"
@@ -71,25 +74,66 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
 
   if (!isMounted) {
     return (
-      <View style={{ bottom: 0, left: 0, pointerEvents: 'box-none', position: 'absolute', right: 0 }}>
+      <View
+        style={{ bottom: 0, left: 0, overflow: 'visible', pointerEvents: 'box-none', position: 'absolute', right: 0 }}
+      >
         <DrawerHandle expanded={false} />
       </View>
     );
   }
 
   return (
-    <View style={{ overflow: 'hidden' }}>
+    <View
+      style={{
+        height: contentHeight > 0 ? contentHeight + HANDLE_HEIGHT : undefined,
+        overflow: 'hidden',
+      }}
+    >
       <Animated.View
-        className="rounded-t-[24px] bg-slate-50"
         style={{
-          backgroundColor: '#F8FAFC',
-          borderTopColor: '#CBD5E1',
-          borderTopWidth: 1,
+          bottom: contentHeight > 0 ? 0 : undefined,
+          left: contentHeight > 0 ? 0 : undefined,
+          opacity: contentHeight > 0 ? 1 : 0,
+          position: contentHeight > 0 ? 'absolute' : 'relative',
+          right: contentHeight > 0 ? 0 : undefined,
           transform: [{ translateY }],
         }}
       >
-        <DrawerHandle expanded={isOpen} />
-        <View onLayout={handleContentLayout} style={{ paddingBottom: 12, paddingHorizontal: 24 }}>
+        <View
+          pointerEvents="box-none"
+          style={{
+            alignItems: 'center',
+            left: 0,
+            position: 'absolute',
+            right: 0,
+            top: -HANDLE_HEIGHT,
+            zIndex: 1,
+          }}
+        >
+          <DrawerHandle expanded={isOpen} />
+        </View>
+        <View
+          className="rounded-t-[24px] bg-slate-50"
+          onLayout={handleContentLayout}
+          style={{
+            backgroundColor: DRAWER_COLOR,
+            borderColor: DRAWER_BORDER_COLOR,
+            borderWidth: 1,
+            paddingBottom: 12,
+            paddingHorizontal: 24,
+          }}
+        >
+          <View
+            pointerEvents="none"
+            style={{
+              alignSelf: 'center',
+              backgroundColor: DRAWER_COLOR,
+              height: 1,
+              position: 'absolute',
+              top: -1,
+              width: HANDLE_WIDTH,
+            }}
+          />
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {stories.map((story, index) => (
               <View key={story.id} style={{ aspectRatio: 1, overflow: 'hidden', padding: 5, width: '12.5%' }}>
