@@ -119,8 +119,7 @@ export default function StoryDrawer({ isOpen, selectedStoryId, stories, onSelect
             backgroundColor: DRAWER_COLOR,
             borderColor: DRAWER_BORDER_COLOR,
             borderWidth: 1,
-            paddingBottom: 12,
-            paddingHorizontal: 24,
+            padding: 12,
           }}
         >
           <View
